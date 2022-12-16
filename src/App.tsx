@@ -1,9 +1,9 @@
-import React from 'react';
+import Header from './components/Header/Header';
 
-const App: React.FunctionComponent = () => {
+const App = () => {
   return (
     <div className="App">
-      <div>Hello</div>
+      <Header />
     </div>
   );
 };
