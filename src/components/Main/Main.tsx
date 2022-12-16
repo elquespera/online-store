@@ -1,10 +1,10 @@
 import styles from './Main.module.scss';
 import { BrowserRouter } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
-import StoreFront from '../StoreFront/StoreFront';
-import CartPage from '../CartPage/CartPage';
-import DetailsPage from '../DetailsPage/DetailsPage';
-import NotFoundPage from '../NotFoundPage/NotFoundPage';
+import StoreFront from '../../pages/StoreFrontPage/StoreFrontPage';
+import CartPage from '../../pages/CartPage/CartPage';
+import DetailsPage from '../../pages/DetailsPage/DetailsPage';
+import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
 
 const Main = () => {
   return (
