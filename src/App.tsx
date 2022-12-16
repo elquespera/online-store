@@ -1,9 +1,13 @@
-import React from 'react';
+import Footer from './components/Footer/Footer';
+import Header from './components/Header/Header';
+import Main from './components/Main/Main';
 
-const App: React.FunctionComponent = () => {
+const App = () => {
   return (
     <div className="App">
-      <div>Hello</div>
+      <Header />
+      <Main />
+      <Footer />
     </div>
   );
 };
