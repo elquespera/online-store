@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import styles from './OrderInput.module.scss';
 
 interface OrderInputProps {
@@ -21,7 +21,6 @@ const OrderInput = ({
   onChange,
 }: OrderInputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
 
   const validateInput = () => {
     if (inputRef.current) {
@@ -34,7 +33,7 @@ const OrderInput = ({
   if (!valid) containterClass += ' ' + styles.invalid;
 
   return (
-    <div className={containterClass} ref={containerRef}>
+    <div className={containterClass}>
       <input
         ref={inputRef}
         placeholder={placeholder}
