@@ -40,6 +40,7 @@ const OrderInput = ({
         onInput={validateInput}
         onBlur={validateInput}
         value={value}
+        size={1}
       />
       <span className={styles.hint}>{hint}</span>
     </div>

@@ -3,6 +3,8 @@
   flex-direction: column;
   input {
     padding: 0.3em 0.6em;
+    width: auto;
+    min-width: 3ch;
   }
   .hint {
     visibility: hidden;
