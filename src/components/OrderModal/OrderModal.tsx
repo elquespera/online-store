@@ -127,8 +127,8 @@ const OrderModal = ({ isOpened, onCancel, onSuccess }: OrderModalProps) => {
   const closeDialog = (e: React.SyntheticEvent) => {
     e.preventDefault();
     if (!isRedirecting) {
-      clearInputs();
       onCancel();
+      clearInputs();
     }
   };
 
