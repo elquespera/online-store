@@ -61,7 +61,7 @@ const ORDER_INPUTS = [
     value: '',
     placeholder: 'Card Number',
     hint: 'Must contain 16 numbers',
-    pattern: /^[0-9]{16}$/,
+    pattern: /^[0-9]{4}(\s[0-9]{4}){3}$/,
     valid: true,
   },
   {
@@ -69,7 +69,7 @@ const ORDER_INPUTS = [
     value: '',
     placeholder: 'Valid Thru',
     hint: 'MM/YY',
-    pattern: /^[0-9]{4}$/,
+    pattern: /^[0-9]{2}\/[0-9]{2}$/,
     valid: true,
   },
   {
@@ -137,14 +137,47 @@ const OrderModal = ({ isOpened, onCancel, onSuccess }: OrderModalProps) => {
   };
 
   const validateInput = (id: number, value: string, pattern: RegExp) => {
-    if (inputs[id]) {
-      setInputs((prev) => {
-        const copyInputs = [...prev];
-        copyInputs[id].valid = pattern.test(value) === true;
-        copyInputs[id].value = value;
-        return copyInputs;
-      });
-    }
+    if (!inputs[id]) return;
+    setInputs((prev) => {
+      const copyInputs = [...prev];
+      const input = copyInputs[id];
+      switch (id) {
+        case inputIDs.cardNumber:
+          const cardNumber = value.replace(/\s/g, '');
+          if (cardNumber.length === 0) {
+            input.value = '';
+          }
+          if (cardNumber.length > 0 && cardNumber.length <= 16) {
+            const numbers = cardNumber.match(/.{1,4}/g);
+            console.log(numbers?.length);
+            if (numbers?.every((number) => +number >= 0 && +number <= 9999)) {
+              input.value = numbers.join(' ');
+            }
+          }
+          break;
+        case inputIDs.cardValid:
+          const valid = value.replace('/', '');
+          if (+valid >= 0 && +valid <= 9999) {
+            let month = String(Math.max(1, Math.min(12, +valid.slice(0, 2))));
+            month = month.padStart(2, '0');
+            if (valid.length > 2) {
+              value = month + '/' + valid.slice(2);
+            }
+            input.value = value;
+          }
+          break;
+        case inputIDs.cardCVV:
+          const cvv = +value;
+          if (cvv >= 0 && cvv <= 999) {
+            input.value = value;
+          }
+          break;
+        default:
+          input.value = value;
+      }
+      input.valid = pattern.test(input.value) === true;
+      return copyInputs;
+    });
   };
 
   const validateAllInputs = () => {
