@@ -1,0 +1,18 @@
+.order-input {
+  display: flex;
+  flex-direction: column;
+  input {
+    padding: 0.3em 0.6em;
+  }
+  .hint {
+    visibility: hidden;
+    font-size: 0.8em;
+    color: red;
+  }
+
+  &.invalid {
+    .hint {
+      visibility: visible;
+    }
+  }
+}
