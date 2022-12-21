@@ -44,16 +44,16 @@
         top: 2.4em;
         width: 1.5em;
         height: 1.5em;
-        background: url('../../../public/images/credit-card-solid.svg') center no-repeat;
+        background: url('../../assets/icons/credit-card-solid.svg') center no-repeat;
         
         &.visa {
-          background-image: url('../../../public/images/cc-visa.svg');
+          background-image: url('../../assets/icons/cc-visa.svg');
         }
         &.mastercard {
-          background-image: url('../../../public/images/cc-mastercard.svg');
+          background-image: url('../../assets/icons/cc-mastercard.svg');
         }
         &.discover {
-          background-image: url('../../../public/images/cc-discover.svg');
+          background-image: url('../../assets/icons/cc-discover.svg');
         }
       }  
     }
