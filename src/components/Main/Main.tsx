@@ -10,9 +10,7 @@ const Main = () => {
     <main className={styles.main}>
       <Routes>
         <Route path="/" element={<StoreFront />} />
-        <Route path="product-details">
-          <Route path=":id" element={<DetailsPage />} />
-        </Route>
+        <Route path="product-details/:id" element={<DetailsPage />} />
         <Route path="cart" element={<CartPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
