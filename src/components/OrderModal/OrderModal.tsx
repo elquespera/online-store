@@ -41,22 +41,30 @@ const OrderModal = ({ isOpened, onCancel, onSuccess }: OrderModalProps) => {
   };
 
   const closeDialog = (e: React.SyntheticEvent) => {
-    if (isRedirecting) {
-      e.preventDefault();
-    } else {
+    e.preventDefault();
+    if (!isRedirecting) {
       onCancel();
     }
   };
 
+  const clickDialog = (e: React.MouseEvent) => {
+    if (e.target === modal.current) closeDialog(e);
+  };
+
   return (
-    <dialog className={styles.modal} ref={modal} onCancel={closeDialog}>
+    <dialog
+      className={styles.modal}
+      ref={modal}
+      onCancel={closeDialog}
+      onClick={clickDialog}
+    >
       {isRedirecting ? (
-        <div>
+        <div className={styles.dialog}>
           Your order has been successfully submitted! You will be redirected to
           the main page in {redirectIn} seconds.
         </div>
       ) : (
-        <div>
+        <div className={styles.dialog}>
           <h3>Personal details</h3>
           <form method="dialog" onSubmit={submitForm}>
             <button type="submit">Confirm order</button>

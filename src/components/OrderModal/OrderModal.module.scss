@@ -3,7 +3,12 @@
   margin: 0 auto;
   top: 50%;
   transform: translateY(-50%);
-  padding: 1em;
-  border-radius: 0.3em;
-  border: 1px solid gray;
+  padding: 0;
+  border: 0;
+  max-width: 50ch;
+  .dialog {
+    padding: 1em;
+    border-radius: 0.3em;
+    border: 1px solid gray;
+  }
 }
