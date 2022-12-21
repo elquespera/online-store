@@ -99,11 +99,7 @@ const OrderModal = ({ isOpened, onCancel, onSuccess }: OrderModalProps) => {
   redirectInRef.current = redirectIn;
 
   useEffect(() => {
-    if (isOpened) {
-      modal.current?.showModal();
-    } else {
-      modal.current?.close();
-    }
+    isOpened ? modal.current?.showModal() : modal.current?.close();
   }, [isOpened]);
 
   const submitForm = (e: React.FormEvent) => {
@@ -119,7 +115,7 @@ const OrderModal = ({ isOpened, onCancel, onSuccess }: OrderModalProps) => {
         onSuccess();
         setIsRedirecting(false);
       } else {
-        setRedirectIn((prev) => prev - 1);
+        setRedirectIn((seconds) => seconds - 1);
       }
     }, 1000);
   };
@@ -209,7 +205,7 @@ const OrderModal = ({ isOpened, onCancel, onSuccess }: OrderModalProps) => {
     });
   };
 
-  const validateAllInputs = () => {
+  const validateAllInputs = (): boolean => {
     inputs.forEach(({ id, value, pattern }) =>
       validateInput(id, value, pattern)
     );
