@@ -32,8 +32,20 @@
 
       .card-pic {
         position: absolute;
-        top: 2.5em;
-
+        top: 2.4em;
+        width: 1.5em;
+        height: 1.5em;
+        background: url('../../../public/images/credit-card-solid.svg') center no-repeat;
+        
+        &.visa {
+          background-image: url('../../../public/images/cc-visa.svg');
+        }
+        &.mastercard {
+          background-image: url('../../../public/images/cc-mastercard.svg');
+        }
+        &.discover {
+          background-image: url('../../../public/images/cc-discover.svg');
+        }
       }  
       div:first-of-type {
         grid-column: 1 / 3;

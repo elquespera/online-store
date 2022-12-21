@@ -82,11 +82,19 @@ const ORDER_INPUTS = [
   },
 ];
 
+const CARD_TYPES: { [index: string]: string } = {
+  '4': 'visa',
+  '5': 'mastercard',
+  '6': 'discover',
+} as const;
+
 const OrderModal = ({ isOpened, onCancel, onSuccess }: OrderModalProps) => {
   const modal = useRef<HTMLDialogElement>(null);
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [redirectIn, setRedirectIn] = useState(0);
   const [inputs, setInputs] = useState(ORDER_INPUTS);
+  const [cardFirstDigit, setCardFirstDigit] = useState('0');
+
   const redirectInRef = useRef(redirectIn);
   redirectInRef.current = redirectIn;
 
@@ -128,6 +136,27 @@ const OrderModal = ({ isOpened, onCancel, onSuccess }: OrderModalProps) => {
     if (e.target === modal.current) closeDialog(e);
   };
 
+  const generateInputs = (from: number, to?: number) => {
+    return (
+      <React.Fragment>
+        {inputs
+          .slice(from, to)
+          .map(({ id, value, placeholder, hint, pattern, valid }) => (
+            <OrderInput
+              key={id}
+              id={id}
+              value={value}
+              placeholder={placeholder}
+              hint={hint}
+              pattern={pattern}
+              valid={valid}
+              onChange={validateInput}
+            />
+          ))}
+      </React.Fragment>
+    );
+  };
+
   const clearInputs = () => {
     inputs.forEach((input) => {
       input.value = '';
@@ -149,11 +178,11 @@ const OrderModal = ({ isOpened, onCancel, onSuccess }: OrderModalProps) => {
           }
           if (cardNumber.length > 0 && cardNumber.length <= 16) {
             const numbers = cardNumber.match(/.{1,4}/g);
-            console.log(numbers?.length);
             if (numbers?.every((number) => +number >= 0 && +number <= 9999)) {
               input.value = numbers.join(' ');
             }
           }
+          setCardFirstDigit(input.value.slice(0, 1));
           break;
         case inputIDs.cardValid:
           const valid = value.replace('/', '');
@@ -187,6 +216,9 @@ const OrderModal = ({ isOpened, onCancel, onSuccess }: OrderModalProps) => {
     return inputs.every((input) => input.valid);
   };
 
+  const cardPicClass =
+    styles['card-pic'] + ' ' + styles[CARD_TYPES[cardFirstDigit]];
+
   return (
     <dialog
       className={styles.modal}
@@ -204,38 +236,12 @@ const OrderModal = ({ isOpened, onCancel, onSuccess }: OrderModalProps) => {
           <form method="dialog" onSubmit={submitForm}>
             <div className={styles['personal-details']}>
               <h3>Personal details</h3>
-              {inputs
-                .slice(inputIDs.name, inputIDs.cardNumber)
-                .map(({ id, value, placeholder, hint, pattern, valid }) => (
-                  <OrderInput
-                    key={id}
-                    id={id}
-                    value={value}
-                    placeholder={placeholder}
-                    hint={hint}
-                    pattern={pattern}
-                    valid={valid}
-                    onChange={validateInput}
-                  />
-                ))}
+              {generateInputs(inputIDs.name, inputIDs.cardNumber)}
             </div>
             <div className={styles['card-details']}>
               <h3>Credit card details</h3>
-              <span className={styles['card-pic']}>MC</span>
-              {inputs
-                .slice(inputIDs.cardNumber)
-                .map(({ id, value, placeholder, hint, pattern, valid }) => (
-                  <OrderInput
-                    key={id}
-                    id={id}
-                    value={value}
-                    placeholder={placeholder}
-                    hint={hint}
-                    pattern={pattern}
-                    valid={valid}
-                    onChange={validateInput}
-                  />
-                ))}
+              <span className={cardPicClass}></span>
+              {generateInputs(inputIDs.cardNumber)}
             </div>
             <button type="submit">Confirm order</button>
           </form>
