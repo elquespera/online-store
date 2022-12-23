@@ -1,2 +1,19 @@
+@use '../../styles/variables' as vars;
+
 .store-front-page {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1em;
+  .filters-panel {
+    padding: 1em;
+    display: grid;
+    gap: 1em;
+    grid-template-rows: 200px 200px;
+  }
+}
+
+@media screen and (max-width: vars.$mobile-breakpoint) {
+  .store-front-page {
+    grid-template-columns: 1fr;
+  }
 }
