@@ -9,7 +9,6 @@ const OneProduct = (props: { product: Product }) => {
     useContext(CartProductsContext);
   function addToCartHandler() {
     setCartProducts([...cartProducts, product]);
-    console.log('qw');
   }
 
   function removeToCartHandler() {
