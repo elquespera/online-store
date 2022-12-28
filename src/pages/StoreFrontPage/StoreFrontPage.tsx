@@ -3,6 +3,7 @@ import OneProduct from '../../components/OneProduct/OneProduct';
 import { Product } from '../../http/interface';
 import { getAllProducts } from '../../http/product';
 import Card from '../../components/Card/Card';
+import RangeInput from '../../components/RangeInput/RangeInput';
 import SelectInput from '../../components/SelectInput/SelectInput';
 import styles from './StoreFrontPage.module.scss';
 
@@ -45,6 +46,8 @@ const StoreFrontPage = () => {
           )}
           <SelectInput title="Categories" options={categories} />
           <SelectInput title="Brands" options={brands} />
+          <RangeInput title="Price"></RangeInput>
+          <RangeInput title="Stock"></RangeInput>
         </div>
       </Card>
       <Card title="Products"></Card>
