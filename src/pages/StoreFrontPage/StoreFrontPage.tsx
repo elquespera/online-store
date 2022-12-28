@@ -8,12 +8,6 @@ import SelectInput from '../../components/SelectInput/SelectInput';
 import styles from './StoreFrontPage.module.scss';
 
 const mockSelect = (titles: string[], max: number, length = 20) => {
-  const [products, setProducts] = useState<Product[] | undefined>([]);
-
-  useEffect(() => {
-    getAllProducts().then((res) => setProducts(res));
-  }, []);
-
   return Array.from({ length })
     .fill(0)
     .map(() => {
@@ -27,6 +21,12 @@ const mockSelect = (titles: string[], max: number, length = 20) => {
 };
 
 const StoreFrontPage = () => {
+  const [products, setProducts] = useState<Product[] | undefined>([]);
+
+  useEffect(() => {
+    getAllProducts().then((res) => setProducts(res));
+  }, []);
+
   const categories = mockSelect(
     ['groceries', 'laptops', 'smaptphones', 'skincare', 'home decorations'],
     5,
@@ -37,20 +37,21 @@ const StoreFrontPage = () => {
     <div className={styles['store-front-page']}>
       <Card title="Filters">
         <div className={styles['filters-panel']}>
-          {products ? (
-            products.map((product) => (
-              <OneProduct key={product.id} product={product} />
-            ))
-          ) : (
-            <div>Products not found</div>
-          )}
           <SelectInput title="Categories" options={categories} />
           <SelectInput title="Brands" options={brands} />
           <RangeInput title="Price"></RangeInput>
           <RangeInput title="Stock"></RangeInput>
         </div>
       </Card>
-      <Card title="Products"></Card>
+      <Card title="Products">
+        {products ? (
+          products.map((product) => (
+            <OneProduct key={product.id} product={product} />
+          ))
+        ) : (
+          <div>Products not found</div>
+        )}
+      </Card>
     </div>
   );
 };
