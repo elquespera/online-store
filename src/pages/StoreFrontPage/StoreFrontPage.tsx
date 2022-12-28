@@ -44,13 +44,15 @@ const StoreFrontPage = () => {
         </div>
       </Card>
       <Card title="Products">
-        {products ? (
-          products.map((product) => (
-            <OneProduct key={product.id} product={product} />
-          ))
-        ) : (
-          <div>Products not found</div>
-        )}
+        <div className={styles['products-panel']}>
+          {products ? (
+            products.map((product) => (
+              <OneProduct key={product.id} product={product} />
+            ))
+          ) : (
+            <div>Products not found</div>
+          )}
+        </div>
       </Card>
     </div>
   );

@@ -10,6 +10,9 @@
     gap: 1em;
     grid-template-rows: 200px 200px auto auto;
   }
+  .products-panel {
+    padding: 1em;
+  }
 }
 
 @media screen and (max-width: vars.$mobile-breakpoint) {
