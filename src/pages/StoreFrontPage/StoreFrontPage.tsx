@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import OneProduct from '../../components/OneProduct/OneProduct';
+import ProductItem from '../../components/ProductItem/ProductItem';
 import {
   ProductCategoryFields,
   ProductFilterOptions,
@@ -185,10 +185,10 @@ const StoreFrontPage = () => {
             onChange={viewStyleChange}
           ></ViewSwitcher>
         </div>
-        <div className={styles['products-panel']}>
+        <div className={styles['products-panel'] + ' ' + styles[viewStyle]}>
           {foundProducts && foundProducts.length > 0 ? (
             foundProducts.map((product) => (
-              <OneProduct key={product.id} product={product} />
+              <ProductItem key={product.id} data={product} style={viewStyle} />
             ))
           ) : (
             <div>Products not found</div>

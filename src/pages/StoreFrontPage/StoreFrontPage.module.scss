@@ -62,6 +62,22 @@
   }
   .products-panel {
     padding: 1em;
+
+    &.list {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+    }
+
+    &.grid, &.compact {
+      display: grid;
+      gap: 1em;
+      grid-template-columns: repeat(auto-fit, minmax(var(--product-card-size), 1fr));
+    }
+
+    &.compact {
+      grid-template-columns: repeat(auto-fit, minmax(var(--product-card-compact-size), 1fr));
+    }
   }
 }
 

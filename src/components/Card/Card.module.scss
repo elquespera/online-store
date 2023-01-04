@@ -2,12 +2,16 @@
   border: 1px solid var(--card-title-bg-color);
   border-radius: 0.5em;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr;
+
   .title {
     color: var(--card-title-color);
     background-color: var(--card-title-bg-color);
     padding: 0.2em 0.5em;
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .body {
     color: var(--card-body-color);
