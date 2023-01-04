@@ -53,10 +53,14 @@
   .search-panel {
     padding: 1em;
     display: flex;
+    flex-wrap: wrap;
     gap: 1em;
 
+    .search-input, .sort-select {
+      padding: 0.3em 0.8em;      
+    }
+
     .sort-select {
-      padding: 0.3em 0.8em;
       margin-right: auto;
     }
   }

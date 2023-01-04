@@ -164,6 +164,7 @@ const StoreFrontPage = () => {
       <Card title={`Products (${foundProducts.length})`}>
         <div className={styles['search-panel']}>
           <input
+            className={styles['search-input']}
             type="text"
             placeholder="Search product..."
             value={searchStr}
