@@ -2,7 +2,7 @@
 
 .store-front-page {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto 2fr;
   gap: 1em;
   .filters-panel {
     padding: 1em;
@@ -85,7 +85,7 @@
   }
 }
 
-@media screen and (max-width: vars.$mobile-breakpoint) {
+@media screen and (max-width: vars.$tablet-breakpoint) {
   .store-front-page {
     grid-template-columns: 1fr;
   }
