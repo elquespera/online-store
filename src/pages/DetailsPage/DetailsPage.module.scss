@@ -1,2 +1,37 @@
-.details-page {
+.bread-crumbs {
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+  margin: 0 auto;
+
+  .store:hover {
+    color: #808080;
+    cursor: pointer;
+  }
+}
+
+.details-product {
+  border: 2px solid skyblue;
+  border-radius: 5px;
+  margin-top: 20px;
+
+  .title {
+    font-size: 20px;
+    text-align: center;
+    border-bottom: 2px solid skyblue;
+  }
+}
+
+.property {
+  margin: 0 auto;
+}
+
+.wrapper-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.price {
+  display: flex;
+  flex-direction: column;
 }
