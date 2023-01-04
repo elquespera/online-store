@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import OneProduct from '../../components/OneProduct/OneProduct';
-import { ProductCategoryFields } from '../../constants';
+import { ProductCategoryFields, ProductFilterOptions } from '../../constants';
 import { Product, SelectOption } from '../../types';
 import { ProductService } from '../../services/ProductsService/ProductService';
 import Card from '../../components/Card/Card';
@@ -12,13 +12,25 @@ import { useSearchParams } from 'react-router-dom';
 
 const COPY_HINT_DURATION = 2000;
 
+const writeSearchParams = (
+  searchParams: URLSearchParams,
+  field: string,
+  value: string
+) => {
+  if (value === '') {
+    searchParams.delete(field);
+  } else {
+    searchParams.set(field, value);
+  }
+};
+
 const StoreFrontPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [foundProducts, setFoundProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<SelectOption[]>([]);
   const [brands, setBrands] = useState<SelectOption[]>([]);
+  const [searchStr, setSearchStr] = useState('');
   const [copyHintVisible, setCopyHintVisible] = useState(false);
-
   const [searchParams, setSearchParams] = useSearchParams();
 
   let productFilters = ProductService.generateProductFilters(searchParams);
@@ -54,15 +66,7 @@ const StoreFrontPage = () => {
         productFilters.brands
       )
     );
-  };
-
-  const filterChange = () => {
-    setSearchParams(
-      new URLSearchParams({
-        categories: ProductService.selectOptionsToString(categories),
-        brands: ProductService.selectOptionsToString(brands),
-      })
-    );
+    setSearchStr(productFilters.search || '');
   };
 
   const clearFilters = () => setSearchParams();
@@ -72,6 +76,26 @@ const StoreFrontPage = () => {
     navigator.clipboard.writeText(window.location.href);
     setCopyHintVisible(true);
     setTimeout(() => setCopyHintVisible(false), COPY_HINT_DURATION);
+  };
+
+  // Event Handles
+  const filterChange = () => {
+    writeSearchParams(
+      searchParams,
+      ProductFilterOptions.categories,
+      ProductService.selectOptionsToString(categories)
+    );
+    writeSearchParams(
+      searchParams,
+      ProductFilterOptions.brands,
+      ProductService.selectOptionsToString(brands)
+    );
+    setSearchParams(searchParams);
+  };
+
+  const searchInputChange = (str: string) => {
+    writeSearchParams(searchParams, ProductFilterOptions.search, str);
+    setSearchParams(searchParams);
   };
 
   return (
@@ -114,6 +138,14 @@ const StoreFrontPage = () => {
         </div>
       </Card>
       <Card title={`Products (${foundProducts.length})`}>
+        <div className={styles['search-panel']}>
+          <input
+            type="text"
+            placeholder="Search product..."
+            value={searchStr}
+            onChange={(e) => searchInputChange(e.target.value)}
+          />
+        </div>
         <div className={styles['products-panel']}>
           {foundProducts && foundProducts.length > 0 ? (
             foundProducts.map((product) => (

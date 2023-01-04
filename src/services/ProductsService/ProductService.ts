@@ -1,15 +1,20 @@
 import {
   Product,
   ProductFilters,
+  ProductIndex,
   ProductSelectField,
   SelectOption,
 } from '../../types';
-import { ProductFilterOptions } from '../../constants';
+import {
+  ProductFilterOptions,
+  PARAMS_SEPARATOR,
+  ProductSearchableFields,
+} from '../../constants';
 import { PRODUCTS } from '../../data/Products';
 
 export const ProductService = {
   getAll() {
-    return PRODUCTS;
+    return [...PRODUCTS];
   },
 
   countField(data: Product[], field: ProductSelectField) {
@@ -34,32 +39,43 @@ export const ProductService = {
         filters.brands?.includes(product.brand)
       );
 
+    if (typeof filters.search === 'string') {
+      const searchStr = filters.search.toLowerCase();
+      products = products.filter((product) => {
+        const prod = product as ProductIndex;
+        return Object.keys(ProductSearchableFields).some((field) => {
+          const value = prod[field];
+          return value.toString().toLowerCase().includes(searchStr);
+        });
+      });
+    }
+
     return products;
   },
 
   generateProductFilters(searchParams: URLSearchParams): ProductFilters {
-    // const Separator = '↕';
-    const Separator = '$';
     const filterOptions: ProductFilters = {};
 
     const categories = searchParams.get(ProductFilterOptions.categories);
-    if (categories) filterOptions.categories = categories.split(Separator);
+    if (categories)
+      filterOptions.categories = categories.split(PARAMS_SEPARATOR);
     const brands = searchParams.get(ProductFilterOptions.brands);
-    if (brands) filterOptions.brands = brands.split(Separator);
+    if (brands) filterOptions.brands = brands.split(PARAMS_SEPARATOR);
     const price = searchParams.get(ProductFilterOptions.price);
     if (price) {
-      const min = +price.split(Separator)[0] || 0;
-      const max = +price.split(Separator)[1] || 0;
+      const min = +price.split(PARAMS_SEPARATOR)[0] || 0;
+      const max = +price.split(PARAMS_SEPARATOR)[1] || 0;
       filterOptions.price = { min, max };
     }
     const stock = searchParams.get(ProductFilterOptions.stock);
     if (stock) {
-      const min = +stock.split(Separator)[0] || 0;
-      const max = +stock.split(Separator)[1] || 0;
+      const min = +stock.split(PARAMS_SEPARATOR)[0] || 0;
+      const max = +stock.split(PARAMS_SEPARATOR)[1] || 0;
       filterOptions.stock = { min, max };
     }
 
-    filterOptions.search = searchParams.get(ProductFilterOptions.search);
+    filterOptions.search =
+      searchParams.get(ProductFilterOptions.search) || undefined;
 
     return filterOptions;
   },
@@ -87,6 +103,6 @@ export const ProductService = {
     return selectOptions
       .filter((option) => option.checked)
       .map(({ title }) => title)
-      .join('$');
+      .join(PARAMS_SEPARATOR);
   },
 };

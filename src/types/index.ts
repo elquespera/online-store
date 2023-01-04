@@ -14,6 +14,10 @@ export interface Product {
   images: string[];
 }
 
+export interface ProductIndex {
+  [state: string]: string | number | string[];
+}
+
 interface MinMax {
   min: number;
   max: number;
@@ -24,7 +28,7 @@ export interface ProductFilters {
   brands?: string[];
   price?: MinMax;
   stock?: MinMax;
-  search?: string | null;
+  search?: string;
 }
 
 export type ProductSelectField =
