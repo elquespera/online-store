@@ -51,6 +51,21 @@ button {
   transition: background-color 0.2s ease-in;
 }
 
-button:hover, button:focus {
+button:hover {
   background-color: var(--button-hover-bg-color);
+}
+
+button.image-button {
+  display: flex;
+  align-items: center;
+  gap: 0.2em;
+  &::before {
+    content: '';
+    display: block;
+    width: 1.2em;
+    height: 1.2em;
+    filter: invert(1);
+    background-repeat: no-repeat;
+    background-size: 1.2em;
+  }
 }

@@ -11,8 +11,43 @@
     grid-template-rows: auto 200px 200px auto auto;
 
     .buttons-panel {
+      position: relative;
       display: flex;
+      flex-wrap: wrap;
+      gap: 1em;
       justify-content: space-around;
+
+      .clear-filters::before {
+        background-image: url('../../assets/icons/clear-filters.svg');
+      }
+
+      .copy-filters {
+        &::before {
+          background-image: url('../../assets/icons/copy.svg');
+        }
+
+        &.copied::before {
+          background-image: url('../../assets/icons/check.svg');
+        }
+
+        &.copied + .copy-hint {
+          display: block;
+        }
+      }
+
+      .copy-hint {
+        display: none;
+        position: absolute;
+        top: 120%;
+        right: 0;
+        width: fit-content;
+        text-align: center;
+        color: white;
+        padding: 0.2em 0.6em;
+        border-radius: 0.3em;
+        background-color: dimgray;
+      }
+
     }
   }
   .products-panel {

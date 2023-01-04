@@ -10,11 +10,14 @@ import styles from './StoreFrontPage.module.scss';
 
 import { useSearchParams } from 'react-router-dom';
 
+const COPY_HINT_DURATION = 2000;
+
 const StoreFrontPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [foundProducts, setFoundProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<SelectOption[]>([]);
   const [brands, setBrands] = useState<SelectOption[]>([]);
+  const [copyHintVisible, setCopyHintVisible] = useState(false);
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -62,8 +65,13 @@ const StoreFrontPage = () => {
     );
   };
 
-  const clearFilters = () => {
-    setSearchParams('');
+  const clearFilters = () => setSearchParams();
+
+  const copyFilters = () => {
+    if (copyHintVisible) return;
+    navigator.clipboard.writeText(window.location.href);
+    setCopyHintVisible(true);
+    setTimeout(() => setCopyHintVisible(false), COPY_HINT_DURATION);
   };
 
   return (
@@ -71,8 +79,25 @@ const StoreFrontPage = () => {
       <Card title="Filters">
         <div className={styles['filters-panel']}>
           <div className={styles['buttons-panel']}>
-            <button onClick={clearFilters}>Clear filters</button>
-            <button>Copy filters</button>
+            <button
+              className={'image-button ' + styles['clear-filters']}
+              onClick={clearFilters}
+            >
+              Clear filters
+            </button>
+            <button
+              className={
+                'image-button ' +
+                (copyHintVisible ? styles['copied'] + ' ' : '') +
+                styles['copy-filters']
+              }
+              onClick={copyFilters}
+            >
+              Copy filters
+            </button>
+            <span className={styles['copy-hint']}>
+              The url was copied to the clipboard!
+            </span>
           </div>
           <SelectInput
             title="Categories"
