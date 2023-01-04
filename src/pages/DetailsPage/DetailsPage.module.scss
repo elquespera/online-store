@@ -1,8 +1,14 @@
+.details-page {
+  margin-top: 15px;
+  text-align: center;
+}
+
 .bread-crumbs {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 95%;
-  margin: 0 auto;
+  margin: 10px auto;
 
   .store:hover {
     color: #808080;
@@ -13,12 +19,16 @@
 .details-product {
   border: 2px solid skyblue;
   border-radius: 5px;
-  margin-top: 20px;
+  margin: 20px 5px;
 
   .title {
     font-size: 20px;
     text-align: center;
     border-bottom: 2px solid skyblue;
+  }
+
+  @media screen and (max-width: 960px) {
+    max-width: 600px;
   }
 }
 
@@ -29,9 +39,57 @@
 .wrapper-info {
   display: flex;
   justify-content: space-between;
+
+  @media screen and (max-width: 960px) {
+
+    flex-wrap: wrap;
+
+    .wrapper-price {
+      order: 0;
+    }
+
+    .property {
+      order: 1;
+    }
+  }
+
+  @media screen and (max-width: 520px) {
+    justify-content: center;
+  }
 }
 
-.price {
+.wrapper-price {
+  min-width: 180px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  order: 0;
+
+  .price {
+    font-size: 30px;
+  }
+
+  .btn {
+    font-size: 18px;
+    border: 2px solid skyblue;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px 0;
+
+    &:hover {
+      background-color: rgb(156, 247, 156);
+    }
+  }
+
+  @media screen and (max-width: 520px) {
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px 5px;
+
+    .btn {
+      margin-left: 5px;
+      padding: 3px;
+    }
+  }
 }

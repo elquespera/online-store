@@ -50,10 +50,10 @@ const DetailsPage = () => {
                 );
               })}
           </div>
-          <div className={styles.price}>
-            <div>€{product?.price}</div>
-            <button>ADD TO CART</button>
-            <button>BUY NOW</button>
+          <div className={styles['wrapper-price']}>
+            <div className={styles.price}>€{product?.price}</div>
+            <button className={styles['btn']}>ADD TO CART</button>
+            <button className={styles['btn']}>BUY NOW</button>
           </div>
         </div>
       </div>
