@@ -8,7 +8,7 @@ import {
   ProductViewStyles,
 } from '../../constants';
 import { Product, SelectOption } from '../../types';
-import { ProductService } from '../../services/ProductsService/ProductService';
+import { ProductService } from '../../services/ProductService';
 import Card from '../../components/Card/Card';
 import RangeInput from '../../components/RangeInput/RangeInput';
 import SelectInput from '../../components/SelectInput/SelectInput';

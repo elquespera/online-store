@@ -4,14 +4,14 @@ import {
   ProductIndex,
   ProductSelectField,
   SelectOption,
-} from '../../types';
+} from '../types';
 import {
   ProductFilterOptions,
   PARAMS_SEPARATOR,
   ProductSearchableFields,
   ProductSortValues,
-} from '../../constants';
-import { PRODUCTS } from '../../data/Products';
+} from '../constants';
+import { PRODUCTS } from '../data/Products';
 
 export const ProductService = {
   getAll() {
