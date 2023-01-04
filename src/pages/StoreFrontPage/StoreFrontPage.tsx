@@ -1,52 +1,89 @@
 import { useEffect, useState } from 'react';
 import OneProduct from '../../components/OneProduct/OneProduct';
-import { Product } from '../../http/interface';
-import { getAllProducts } from '../../http/product';
+import { ProductCategoryFields } from '../../constants';
+import { Product, SelectOption } from '../../types';
+import { ProductService } from '../../services/ProductsService/ProductService';
 import Card from '../../components/Card/Card';
 import RangeInput from '../../components/RangeInput/RangeInput';
 import SelectInput from '../../components/SelectInput/SelectInput';
 import styles from './StoreFrontPage.module.scss';
 
-const mockSelect = (titles: string[], max: number, length = 20) => {
-  return Array.from({ length })
-    .fill(0)
-    .map(() => {
-      return {
-        title: titles[Math.floor(Math.random() * titles.length)],
-        checked: Math.random() < 0.5,
-        max,
-        found: Math.floor(Math.random() * max),
-      };
-    });
-};
+import { useSearchParams } from 'react-router-dom';
 
 const StoreFrontPage = () => {
-  const [products, setProducts] = useState<Product[] | undefined>([]);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [foundProducts, setFoundProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<SelectOption[]>([]);
+  const [brands, setBrands] = useState<SelectOption[]>([]);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  let productFilters = ProductService.generateProductFilters(searchParams);
 
   useEffect(() => {
-    getAllProducts().then((res) => setProducts(res));
+    setProducts(ProductService.getAll());
   }, []);
 
-  const categories = mockSelect(
-    ['groceries', 'laptops', 'smaptphones', 'skincare', 'home decorations'],
-    5,
-    20
-  );
-  const brands = mockSelect(['Apple', 'Samsung', 'Oppo', 'HP Pavilion'], 8, 25);
+  useEffect(() => {
+    updateFilters();
+  }, [products, foundProducts, searchParams]);
+
+  useEffect(() => {
+    productFilters = ProductService.generateProductFilters(searchParams);
+    setFoundProducts(ProductService.filter(productFilters));
+    updateFilters();
+  }, [searchParams]);
+
+  const updateFilters = () => {
+    setCategories(
+      ProductService.generateSelectData(
+        products,
+        foundProducts,
+        ProductCategoryFields.category,
+        productFilters.categories
+      )
+    );
+    setBrands(
+      ProductService.generateSelectData(
+        products,
+        foundProducts,
+        ProductCategoryFields.brand,
+        productFilters.brands
+      )
+    );
+  };
+
+  const filterChange = () => {
+    setSearchParams(
+      new URLSearchParams({
+        categories: ProductService.selectOptionsToString(categories),
+        brands: ProductService.selectOptionsToString(brands),
+      })
+    );
+  };
+
   return (
     <div className={styles['store-front-page']}>
       <Card title="Filters">
         <div className={styles['filters-panel']}>
-          <SelectInput title="Categories" options={categories} />
-          <SelectInput title="Brands" options={brands} />
+          <SelectInput
+            title="Categories"
+            options={categories}
+            onChange={filterChange}
+          />
+          <SelectInput
+            title="Brands"
+            options={brands}
+            onChange={filterChange}
+          />
           <RangeInput title="Price"></RangeInput>
           <RangeInput title="Stock"></RangeInput>
         </div>
       </Card>
-      <Card title="Products">
+      <Card title={`Products (${foundProducts.length})`}>
         <div className={styles['products-panel']}>
-          {products ? (
-            products.map((product) => (
+          {foundProducts && foundProducts.length > 0 ? (
+            foundProducts.map((product) => (
               <OneProduct key={product.id} product={product} />
             ))
           ) : (

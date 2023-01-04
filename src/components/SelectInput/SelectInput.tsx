@@ -1,24 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { SelectOption } from '../../types';
 import Card from '../Card/Card';
 import styles from './SelectInput.module.scss';
 
-interface SelectOption {
-  title: string;
-  checked: boolean;
-  found: number;
-  max: number;
-}
-
-export type SelectOptions = Array<SelectOption>;
-
 interface SelectInputProps {
   title?: string;
-  options: SelectOptions;
+  options: SelectOption[];
   onChange?: (index: number, checked: boolean) => void;
 }
 
 const SelectInput = ({ title, options, onChange }: SelectInputProps) => {
   const [optionsList, setOptionsList] = useState(options);
+
+  useEffect(() => {
+    setOptionsList(options);
+  }, [options]);
 
   const randomId = Math.floor(Math.random() * 100000);
 
@@ -37,10 +33,10 @@ const SelectInput = ({ title, options, onChange }: SelectInputProps) => {
             <li key={index}>
               <label htmlFor={inputId}>
                 <input
+                  className={option.found <= 0 ? styles.disabled : ''}
                   id={inputId}
                   type="checkbox"
                   checked={option.checked}
-                  disabled={option.found <= 0}
                   onChange={() => optionChange(index)}
                 />
                 <span>{option.title}</span>

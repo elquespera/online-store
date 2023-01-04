@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CartProductContent, CartProductsContext } from '../../context';
-import { Product } from '../../http/interface';
+import { Product } from '../../types';
 import styles from './Header.module.scss';
 
 const Header = () => {

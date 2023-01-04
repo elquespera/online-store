@@ -10,11 +10,11 @@
       align-items: center;
       gap: 0.5em;
 
-      input:checked:not(:disabled) + span {
+      input:checked + span {
         font-weight: bold;
       }
-      input:disabled + span {
-        opacity: 0.6;
+      input.disabled + span {
+        opacity: 0.5;
       }
       .found-max {
         margin-left: auto;
