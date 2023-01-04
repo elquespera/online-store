@@ -26,7 +26,7 @@ const StoreFrontPage = () => {
 
   useEffect(() => {
     updateFilters();
-  }, [products, foundProducts, searchParams]);
+  }, [products, foundProducts]);
 
   useEffect(() => {
     productFilters = ProductService.generateProductFilters(searchParams);
@@ -62,10 +62,18 @@ const StoreFrontPage = () => {
     );
   };
 
+  const clearFilters = () => {
+    setSearchParams('');
+  };
+
   return (
     <div className={styles['store-front-page']}>
       <Card title="Filters">
         <div className={styles['filters-panel']}>
+          <div className={styles['buttons-panel']}>
+            <button onClick={clearFilters}>Clear filters</button>
+            <button>Copy filters</button>
+          </div>
           <SelectInput
             title="Categories"
             options={categories}

@@ -8,7 +8,12 @@
     padding: 1em;
     display: grid;
     gap: 1em;
-    grid-template-rows: 200px 200px auto auto;
+    grid-template-rows: auto 200px 200px auto auto;
+
+    .buttons-panel {
+      display: flex;
+      justify-content: space-around;
+    }
   }
   .products-panel {
     padding: 1em;
