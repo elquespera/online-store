@@ -9,6 +9,7 @@ import {
   ProductFilterOptions,
   PARAMS_SEPARATOR,
   ProductSearchableFields,
+  ProductSortValues,
 } from '../../constants';
 import { PRODUCTS } from '../../data/Products';
 
@@ -50,6 +51,25 @@ export const ProductService = {
       });
     }
 
+    if (filters.sort && ProductSortValues.includes(filters.sort))
+      products = products.sort((a, b) => {
+        switch (filters.sort) {
+          case ProductSortValues[1]:
+            return a.price - b.price;
+          case ProductSortValues[2]:
+            return b.price - a.price;
+          case ProductSortValues[3]:
+            return a.rating - b.rating;
+          case ProductSortValues[4]:
+            return b.rating - a.rating;
+          case ProductSortValues[5]:
+            return a.discountPercentage - b.discountPercentage;
+          case ProductSortValues[6]:
+            return b.discountPercentage - a.discountPercentage;
+        }
+        return 0;
+      });
+
     return products;
   },
 
@@ -76,6 +96,9 @@ export const ProductService = {
 
     filterOptions.search =
       searchParams.get(ProductFilterOptions.search) || undefined;
+
+    filterOptions.sort =
+      searchParams.get(ProductFilterOptions.sort) || undefined;
 
     return filterOptions;
   },

@@ -1,4 +1,4 @@
-import { ProductCategoryFields } from '../constants';
+import { ProductCategoryFields, ProductSortValues } from '../constants';
 
 export interface Product {
   id: number;
@@ -29,6 +29,7 @@ export interface ProductFilters {
   price?: MinMax;
   stock?: MinMax;
   search?: string;
+  sort?: string;
 }
 
 export type ProductSelectField =

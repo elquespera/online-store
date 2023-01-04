@@ -53,6 +53,11 @@
   .search-panel {
     padding: 1em;
     display: flex;
+    gap: 1em;
+
+    .sort-select {
+      padding: 0.3em 0.8em;
+    }
   }
   .products-panel {
     padding: 1em;

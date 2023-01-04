@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
 import OneProduct from '../../components/OneProduct/OneProduct';
-import { ProductCategoryFields, ProductFilterOptions } from '../../constants';
+import {
+  ProductCategoryFields,
+  ProductFilterOptions,
+  ProductSortOptionList,
+  ProductSortValues,
+} from '../../constants';
 import { Product, SelectOption } from '../../types';
 import { ProductService } from '../../services/ProductsService/ProductService';
 import Card from '../../components/Card/Card';
@@ -30,6 +35,7 @@ const StoreFrontPage = () => {
   const [categories, setCategories] = useState<SelectOption[]>([]);
   const [brands, setBrands] = useState<SelectOption[]>([]);
   const [searchStr, setSearchStr] = useState('');
+  const [sortIndex, setSortIndex] = useState(0);
   const [copyHintVisible, setCopyHintVisible] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -67,6 +73,7 @@ const StoreFrontPage = () => {
       )
     );
     setSearchStr(productFilters.search || '');
+    setSortIndex(ProductSortValues.indexOf(productFilters.sort || ''));
   };
 
   const clearFilters = () => setSearchParams();
@@ -95,6 +102,15 @@ const StoreFrontPage = () => {
 
   const searchInputChange = (str: string) => {
     writeSearchParams(searchParams, ProductFilterOptions.search, str);
+    setSearchParams(searchParams);
+  };
+
+  const sortSelectChange = (index: number) => {
+    writeSearchParams(
+      searchParams,
+      ProductFilterOptions.sort,
+      ProductSortValues[index]
+    );
     setSearchParams(searchParams);
   };
 
@@ -145,6 +161,17 @@ const StoreFrontPage = () => {
             value={searchStr}
             onChange={(e) => searchInputChange(e.target.value)}
           />
+          <select
+            className={styles['sort-select']}
+            value={ProductSortValues[sortIndex]}
+            onChange={(e) => sortSelectChange(e.target.selectedIndex)}
+          >
+            {ProductSortOptionList.map(({ id, title }, index) => (
+              <option key={id} value={ProductSortValues[index]}>
+                {title}
+              </option>
+            ))}
+          </select>
         </div>
         <div className={styles['products-panel']}>
           {foundProducts && foundProducts.length > 0 ? (
