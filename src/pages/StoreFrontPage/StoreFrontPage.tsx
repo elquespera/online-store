@@ -5,6 +5,7 @@ import {
   ProductFilterOptions,
   ProductSortOptionList,
   ProductSortValues,
+  ProductViewStyles,
 } from '../../constants';
 import { Product, SelectOption } from '../../types';
 import { ProductService } from '../../services/ProductsService/ProductService';
@@ -14,6 +15,7 @@ import SelectInput from '../../components/SelectInput/SelectInput';
 import styles from './StoreFrontPage.module.scss';
 
 import { useSearchParams } from 'react-router-dom';
+import ViewSwitcher from '../../components/ViewSwitcher/ViewSwitcher';
 
 const COPY_HINT_DURATION = 2000;
 
@@ -36,9 +38,9 @@ const StoreFrontPage = () => {
   const [brands, setBrands] = useState<SelectOption[]>([]);
   const [searchStr, setSearchStr] = useState('');
   const [sortIndex, setSortIndex] = useState(0);
+  const [viewStyle, setViewStyle] = useState(ProductViewStyles[0]);
   const [copyHintVisible, setCopyHintVisible] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
-
   let productFilters = ProductService.generateProductFilters(searchParams);
 
   useEffect(() => {
@@ -74,6 +76,7 @@ const StoreFrontPage = () => {
     );
     setSearchStr(productFilters.search || '');
     setSortIndex(ProductSortValues.indexOf(productFilters.sort || ''));
+    setViewStyle(productFilters.view || ProductViewStyles[0]);
   };
 
   const clearFilters = () => setSearchParams();
@@ -111,6 +114,11 @@ const StoreFrontPage = () => {
       ProductFilterOptions.sort,
       ProductSortValues[index]
     );
+    setSearchParams(searchParams);
+  };
+
+  const viewStyleChange = (style: string) => {
+    writeSearchParams(searchParams, ProductFilterOptions.view, style);
     setSearchParams(searchParams);
   };
 
@@ -172,6 +180,10 @@ const StoreFrontPage = () => {
               </option>
             ))}
           </select>
+          <ViewSwitcher
+            style={viewStyle}
+            onChange={viewStyleChange}
+          ></ViewSwitcher>
         </div>
         <div className={styles['products-panel']}>
           {foundProducts && foundProducts.length > 0 ? (

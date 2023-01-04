@@ -100,6 +100,9 @@ export const ProductService = {
     filterOptions.sort =
       searchParams.get(ProductFilterOptions.sort) || undefined;
 
+    filterOptions.view =
+      searchParams.get(ProductFilterOptions.view) || undefined;
+
     return filterOptions;
   },
 

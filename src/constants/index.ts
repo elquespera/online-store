@@ -5,6 +5,7 @@ export const ProductFilterOptions = {
   stock: 'stock',
   search: 'search',
   sort: 'sort',
+  view: 'view',
 } as const;
 
 export enum ProductCategoryFields {
@@ -42,5 +43,7 @@ export const ProductSortValues = [
   'discount-ascending',
   'discount-descending',
 ];
+
+export const ProductViewStyles = ['grid', 'compact', 'list'];
 
 export const PARAMS_SEPARATOR = '↕';

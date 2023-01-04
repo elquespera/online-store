@@ -30,6 +30,7 @@ export interface ProductFilters {
   stock?: MinMax;
   search?: string;
   sort?: string;
+  view?: string;
 }
 
 export type ProductSelectField =
