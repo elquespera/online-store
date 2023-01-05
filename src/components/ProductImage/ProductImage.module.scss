@@ -1,0 +1,36 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @media screen and (max-width: 520px) {
+    width: 300px;
+  }
+}
+
+.images {
+  display: flex;
+  flex-direction: column;
+  margin: 0 20px;
+
+  .image {
+    border: 2px solid rgb(52, 153, 72);
+    border-radius: 5px;
+    margin: 5px 0;
+    cursor: pointer;
+  }
+
+  @media screen and (max-width: 520px) {
+    margin: 0 5px;
+  }
+}
+
+.current-image  {
+  margin: 20px 0;
+  
+  img {
+    border: 2px solid rgb(52, 153, 72);
+    border-radius: 5px;
+  }
+
+
+}
