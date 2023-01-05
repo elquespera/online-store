@@ -4,7 +4,7 @@ import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import { CartProductsContext } from './context';
-import { Product } from './http/interface';
+import { Product } from './types';
 
 const App = () => {
   const [cartProducts, setCartProducts] = useState<Product[]>([]);

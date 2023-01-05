@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { CartProductContent, CartProductsContext } from '../../context';
-import { Product } from '../../http/interface';
+import { Product } from '../../types';
 import styles from './OneProduct.module.scss';
 
 const OneProduct = (props: { product: Product }) => {

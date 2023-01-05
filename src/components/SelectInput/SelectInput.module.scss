@@ -1,0 +1,27 @@
+.select-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+  padding: 0.5em;
+  li {
+    label {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+
+      input:checked + span {
+        font-weight: bold;
+      }
+      input.disabled + span {
+        opacity: 0.5;
+      }
+      .found-max {
+        margin-left: auto;
+        padding-left: 1.5em;
+        font-size: 0.8em;
+      }
+    }
+
+  }
+}
