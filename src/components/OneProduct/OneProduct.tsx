@@ -5,26 +5,23 @@ import styles from './OneProduct.module.scss';
 
 const OneProduct = (props: { product: Product }) => {
   const { product } = props;
-  const { cartProducts, setCartProducts }: CartProductContent =
-    useContext(CartProductsContext);
-  function addToCartHandler() {
-    setCartProducts([...cartProducts, product]);
-  }
-
-  function removeToCartHandler() {
-    setCartProducts([
-      ...cartProducts.filter((cartProduct) => cartProduct.id !== product.id),
-    ]);
-  }
+  const {
+    cartProducts,
+    setCartProducts,
+    addToCart,
+    removeFromCart,
+  }: CartProductContent = useContext(CartProductsContext);
 
   const classes = cartProducts.includes(product) ? 'in-cart' : '';
   return (
     <div className={styles.product}>
       <div className={styles[classes]}>{product.title}</div>
       {classes !== 'in-cart' ? (
-        <button onClick={addToCartHandler}>Add to cart</button>
+        <button onClick={(e) => addToCart(e, product)}>Add to cart</button>
       ) : (
-        <button onClick={removeToCartHandler}>Remove to cart</button>
+        <button onClick={(e) => removeFromCart(e, product)}>
+          Remove to cart
+        </button>
       )}
     </div>
   );

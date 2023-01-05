@@ -4,6 +4,14 @@ import { Product } from '../types';
 export type CartProductContent = {
   cartProducts: Product[];
   setCartProducts: (products: Product[]) => void;
+  addToCart: (
+    event: React.MouseEvent<HTMLButtonElement>,
+    data: Product
+  ) => void;
+  removeFromCart: (
+    event: React.MouseEvent<HTMLButtonElement>,
+    data: Product
+  ) => void;
 };
 
 export const CartProductsContext = createContext<CartProductContent>({
@@ -23,4 +31,6 @@ export const CartProductsContext = createContext<CartProductContent>({
     },
   ],
   setCartProducts: () => ({}),
+  addToCart: () => ({}),
+  removeFromCart: () => ({}),
 });
