@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import { useSearchParams } from 'react-router-dom';
 import OneProduct from '../../components/OneProduct/OneProduct';
 import OrderModal from '../../components/OrderModal/OrderModal';
 import { CartProductContent, CartProductsContext } from '../../context';
@@ -13,25 +14,36 @@ const CartPage = () => {
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(3);
   const [maxPage, setMaxPage] = useState<number>(0);
+  const [cartParams, setCartParams] = useSearchParams();
 
   useEffect(() => {
-    const limitCart = localStorage.getItem('cart-limit');
-    const pageCart = localStorage.getItem('cart-page');
+    const limitCart =
+      cartParams.get('limit') || localStorage.getItem('cart-limit');
+    const pageCart =
+      cartParams.get('page') || localStorage.getItem('cart-page');
     if (limitCart) {
       setLimit(+limitCart);
+      localStorage.setItem('cart-limit', limitCart);
     }
 
     if (pageCart) {
       setPage(+pageCart);
+      localStorage.setItem('cart-page', pageCart);
+    }
+
+    if (pageCart && limitCart) {
+      setCartParams({ page: pageCart, limit: limitCart });
     }
   }, []);
 
   useEffect(() => {
     const totalPages = Math.ceil(cartProducts.length / limit);
     setMaxPage(totalPages);
+    setCartParams({ page: page.toString(), limit: limit.toString() });
     if (cartProducts.length && page >= totalPages) {
       setPage(totalPages);
       localStorage.setItem('cart-page', totalPages.toString());
+      setCartParams({ page: totalPages.toString(), limit: limit.toString() });
     }
   }, [limit, cartProducts]);
 
@@ -45,6 +57,7 @@ const CartPage = () => {
     const valueTarget = target.value;
     setLimit(+valueTarget);
     localStorage.setItem('cart-limit', valueTarget);
+    setCartParams({ page: page.toString(), limit: valueTarget });
   };
 
   const nextPageHandler = () => {
@@ -55,6 +68,7 @@ const CartPage = () => {
     }
     setPage(nextPage);
     localStorage.setItem('cart-page', nextPage.toString());
+    setCartParams({ page: nextPage.toString(), limit: limit.toString() });
   };
 
   const previousPageHandler = () => {
@@ -64,6 +78,7 @@ const CartPage = () => {
     const prevPage = page - 1;
     setPage(prevPage);
     localStorage.setItem('cart-page', prevPage.toString());
+    setCartParams({ page: prevPage.toString(), limit: limit.toString() });
   };
 
   if (!cartProducts.length) {
