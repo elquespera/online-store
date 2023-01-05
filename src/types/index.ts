@@ -14,6 +14,10 @@ export interface Product {
   images: string[];
 }
 
+export interface CartProduct extends Product {
+  quantity: number;
+}
+
 export interface ProductIndex {
   [state: string]: string | number | string[];
 }

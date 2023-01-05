@@ -4,17 +4,17 @@ import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import { CartProductsContext } from './context';
-import { Product } from './types';
+import { CartProduct, Product } from './types';
 
 const App = () => {
-  const [cartProducts, setCartProducts] = useState<Product[]>([]);
+  const [cartProducts, setCartProducts] = useState<CartProduct[]>([]);
 
   const addToCart = (
     event: React.MouseEvent<HTMLButtonElement>,
     data: Product
   ) => {
     event.preventDefault();
-    const newProductsInCart = [...cartProducts, data];
+    const newProductsInCart = [...cartProducts, { ...data, quantity: 1 }];
     setCartProducts(newProductsInCart);
     localStorage.setItem('cart-items', JSON.stringify(newProductsInCart));
   };

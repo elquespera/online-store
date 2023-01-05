@@ -1,9 +1,9 @@
 import { createContext } from 'react';
-import { Product } from '../types';
+import { CartProduct, Product } from '../types';
 
 export type CartProductContent = {
-  cartProducts: Product[];
-  setCartProducts: (products: Product[]) => void;
+  cartProducts: CartProduct[];
+  setCartProducts: (products: CartProduct[]) => void;
   addToCart: (
     event: React.MouseEvent<HTMLButtonElement>,
     data: Product
@@ -28,6 +28,7 @@ export const CartProductsContext = createContext<CartProductContent>({
       category: '',
       thumbnail: '',
       images: [''],
+      quantity: 0,
     },
   ],
   setCartProducts: () => ({}),

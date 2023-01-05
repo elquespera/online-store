@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CartProductContent, CartProductsContext } from '../../context';
-import { Product } from '../../types';
+import { CartProduct } from '../../types';
 import styles from './Header.module.scss';
 
 const Header = () => {
@@ -17,7 +17,7 @@ const Header = () => {
       <span className={styles.total}>
         Total: $
         {cartProducts.reduce(
-          (sum: number, elem: Product) => sum + elem.price,
+          (sum: number, elem: CartProduct) => sum + elem.price * elem.quantity,
           0
         )}
       </span>
