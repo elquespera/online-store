@@ -1,4 +1,7 @@
+@use '../../styles/variables' as vars;
+
 .details-page {
+  margin: 0 auto;
   margin-top: 15px;
   text-align: center;
 }
@@ -14,21 +17,32 @@
     color: #808080;
     cursor: pointer;
   }
+
+  @media screen and (max-width: vars.$mobile-breakpoint) {
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    div:nth-child(even) {
+      transform: rotate(90deg);
+    }
+  }
 }
 
 .details-product {
-  border: 2px solid skyblue;
+  border: 2px solid var(--card-title-bg-color);
   border-radius: 5px;
   margin: 20px 5px;
 
   .title {
     font-size: 20px;
     text-align: center;
-    border-bottom: 2px solid skyblue;
+    border-bottom: 2px solid var(--card-title-bg-color);
+    background-color: var(--card-title-bg-color);
   }
 
   @media screen and (max-width: 960px) {
     max-width: 600px;
+    margin: 20px auto;
   }
 }
 
@@ -41,7 +55,6 @@
   justify-content: space-between;
 
   @media screen and (max-width: 960px) {
-
     flex-wrap: wrap;
 
     .wrapper-price {
@@ -72,14 +85,10 @@
 
   .btn {
     font-size: 18px;
-    border: 2px solid skyblue;
     border-radius: 5px;
     padding: 5px;
-    margin: 5px 0;
+    margin: 5px 2px;
 
-    &:hover {
-      background-color: rgb(156, 247, 156);
-    }
   }
 
   @media screen and (max-width: 520px) {

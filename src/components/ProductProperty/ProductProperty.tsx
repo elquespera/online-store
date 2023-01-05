@@ -1,3 +1,4 @@
+import { ucFirst } from '../../utils/ucFirst';
 import styles from './ProductProperty.module.scss';
 
 interface ProductPropertyProps {
@@ -11,7 +12,7 @@ const ProductProperty: React.FC<ProductPropertyProps> = ({
 }: ProductPropertyProps) => {
   return (
     <div className={styles.property}>
-      <div className={styles.name}>{name}</div>
+      <div className={styles.name}>{ucFirst(name)}</div>
       <div className={styles.value}>{value}</div>
     </div>
   );

@@ -18,6 +18,10 @@ export const ProductService = {
     return [...PRODUCTS];
   },
 
+  getOne(id: number) {
+    return PRODUCTS.find((product) => product.id === id);
+  },
+
   countField(data: Product[], field: ProductSelectField) {
     const fieldData: { [key: string]: number } = {};
     data.forEach((product) => {

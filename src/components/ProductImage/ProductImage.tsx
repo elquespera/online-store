@@ -3,10 +3,12 @@ import styles from './ProductImage.module.scss';
 
 interface ProductImageProps {
   images: string[];
+  title: string;
 }
 
 const ProductImage: React.FC<ProductImageProps> = ({
   images,
+  title,
 }: ProductImageProps) => {
   const [currentImage, setCurrentImage] = useState(images[0]);
 
@@ -25,7 +27,7 @@ const ProductImage: React.FC<ProductImageProps> = ({
           <img
             key={image}
             src={image}
-            alt="image"
+            alt={`product ${title}`}
             width="60"
             className={styles.image}
             onClick={(e) => changeImageHandler(e)}
@@ -33,7 +35,7 @@ const ProductImage: React.FC<ProductImageProps> = ({
         ))}
       </div>
       <div className={styles['current-image']}>
-        <img src={currentImage} alt="img" width="205" />
+        <img src={currentImage} alt={`current image ${title}`} width="205" />
       </div>
     </div>
   );
