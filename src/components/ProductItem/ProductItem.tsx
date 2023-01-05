@@ -1,4 +1,4 @@
-import { MouseEventHandler, useContext } from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CartProductContent, CartProductsContext } from '../../context';
 import { Product } from '../../types';
