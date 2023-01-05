@@ -15,7 +15,7 @@ const Header = () => {
         </span>
       </Link>
       <span className={styles.total}>
-        Total: $
+        Total: €
         {cartProducts.reduce(
           (sum: number, elem: CartProduct) => sum + elem.price * elem.quantity,
           0
@@ -24,7 +24,12 @@ const Header = () => {
       <Link to="cart">
         <div className={styles.cart}>
           <span className={styles['cart-icon']}></span>
-          <span className={styles.badge}>{cartProducts.length}</span>
+          <span className={styles.badge}>
+            {cartProducts.reduce(
+              (sum: number, elem: CartProduct) => sum + elem.quantity,
+              0
+            )}
+          </span>
         </div>
       </Link>
     </header>
