@@ -48,7 +48,6 @@ const OneProduct: React.FC<Props> = ({ product, index }: Props) => {
         className={styles['product-image']}
         src={product.images[0]}
         alt={`image ${product.title}`}
-        width="180"
       />
       <div className={styles['item-info']}>
         <div className={styles.title}>{product.title}</div>
@@ -60,7 +59,7 @@ const OneProduct: React.FC<Props> = ({ product, index }: Props) => {
           </div>
         </div>
       </div>
-      <div>
+      <div className={styles['wrapper-quantity']}>
         <div className={styles.stock}>Stock: {product.stock}</div>
         <div className={styles.quantity}>
           <button
@@ -77,7 +76,9 @@ const OneProduct: React.FC<Props> = ({ product, index }: Props) => {
             -
           </button>
         </div>
-        <div className={styles.price}>€{product.price * product.quantity}</div>
+        <div className={styles.price}>
+          €{(product.price * product.quantity).toFixed(2)}
+        </div>
       </div>
     </div>
   );

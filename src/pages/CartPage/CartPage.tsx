@@ -21,6 +21,13 @@ const CartPage = () => {
     navigate('/');
   };
 
+  const countTotalPrice = () => {
+    return cartProducts.reduce(
+      (sum: number, elem: CartProduct) => sum + elem.price * elem.quantity,
+      0
+    );
+  };
+
   if (!cartProducts.length) {
     return <div>Cart is Empty</div>;
   }
@@ -54,26 +61,22 @@ const CartPage = () => {
         </div>
         <div
           className={
-            appliedPromocodes.length ? styles['cross-out'] : styles.price
+            appliedPromocodes.length ? styles['old-price'] : styles.price
           }
         >
-          Total: €
-          {cartProducts.reduce(
-            (sum: number, elem: CartProduct) =>
-              sum + elem.price * elem.quantity,
-            0
-          )}
+          Total: €{countTotalPrice()}
         </div>
-        <button onClick={() => setOrderModalOpened(true)}>Buy now</button>
         <CartPromocode
-          price={cartProducts.reduce(
-            (sum: number, elem: CartProduct) =>
-              sum + elem.price * elem.quantity,
-            0
-          )}
+          price={countTotalPrice()}
           appliedPromocodes={appliedPromocodes}
           setAppliedPromocodes={setAppliedPromocodes}
         />
+        <button
+          className={styles['btn-modal']}
+          onClick={() => setOrderModalOpened(true)}
+        >
+          Buy now
+        </button>
       </div>
       <OrderModal
         isOpened={orderModalOpened}

@@ -54,7 +54,10 @@ const CartPagination = ({
 
   const changeLimitHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target;
-    const valueTarget = target.value;
+    let valueTarget = target.value;
+    if (+valueTarget <= 1) {
+      valueTarget = '1';
+    }
     setLimit(+valueTarget);
     localStorage.setItem('cart-limit', valueTarget);
     setCartParams({ page: page.toString(), limit: valueTarget });
@@ -62,36 +65,46 @@ const CartPagination = ({
 
   const nextPageHandler = () => {
     let nextPage = page + 1;
-
     if (nextPage >= maxPage) {
       nextPage = maxPage;
     }
-    setPage(nextPage);
-    localStorage.setItem('cart-page', nextPage.toString());
-    setCartParams({ page: nextPage.toString(), limit: limit.toString() });
+    changePage(nextPage);
   };
 
   const previousPageHandler = () => {
-    if (page === 1) {
-      return;
+    let prevPage = page - 1;
+    if (page <= 1) {
+      prevPage = 1;
     }
-    const prevPage = page - 1;
-    setPage(prevPage);
-    localStorage.setItem('cart-page', prevPage.toString());
-    setCartParams({ page: prevPage.toString(), limit: limit.toString() });
+    changePage(prevPage);
+  };
+
+  const changePage = (page: number) => {
+    setPage(page);
+    localStorage.setItem('cart-page', page.toString());
+    setCartParams({ page: page.toString(), limit: limit.toString() });
   };
 
   return (
     <div className={styles.pagination}>
       <div className={styles.limit}>
         Limit:
-        <input type="number" onChange={changeLimitHandler} value={limit} />
+        <input
+          type="number"
+          className={styles['input-limit']}
+          onChange={changeLimitHandler}
+          value={limit}
+        />
       </div>
       <div className={styles.page}>
         Page:
-        <button onClick={previousPageHandler}>&lt;</button>
+        <button className={styles.btn} onClick={previousPageHandler}>
+          &lt;
+        </button>
         {page}
-        <button onClick={nextPageHandler}>&gt;</button>
+        <button className={styles.btn} onClick={nextPageHandler}>
+          &gt;
+        </button>
       </div>
     </div>
   );
