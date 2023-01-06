@@ -29,7 +29,7 @@ const CartPage = () => {
   };
 
   if (!cartProducts.length) {
-    return <div>Cart is Empty</div>;
+    return <div className={styles['empty-cart']}>Cart is Empty</div>;
   }
 
   return (

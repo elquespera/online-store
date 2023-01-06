@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router';
 import { CartProductContent, CartProductsContext } from '../../context';
 import { CartProduct } from '../../types';
 import styles from './OneProduct.module.scss';
@@ -11,6 +12,7 @@ interface Props {
 const OneProduct: React.FC<Props> = ({ product, index }: Props) => {
   const { cartProducts, setCartProducts, removeFromCart }: CartProductContent =
     useContext(CartProductsContext);
+  const navigate = useNavigate();
 
   const addQuantityHandler = () => {
     if (product.quantity + 1 > product.stock) {
@@ -41,6 +43,10 @@ const OneProduct: React.FC<Props> = ({ product, index }: Props) => {
     localStorage.setItem('cart-items', JSON.stringify(newProductsInCart));
   };
 
+  const navigateToDetailsPage = () => {
+    navigate(`/product-details/${product.id}`);
+  };
+
   return (
     <div className={styles.product}>
       <div className={styles.order}>{index}</div>
@@ -48,8 +54,9 @@ const OneProduct: React.FC<Props> = ({ product, index }: Props) => {
         className={styles['product-image']}
         src={product.images[0]}
         alt={`image ${product.title}`}
+        onClick={navigateToDetailsPage}
       />
-      <div className={styles['item-info']}>
+      <div className={styles['item-info']} onClick={navigateToDetailsPage}>
         <div className={styles.title}>{product.title}</div>
         <div className={styles.description}>{product.description}</div>
         <div className={styles.other}>

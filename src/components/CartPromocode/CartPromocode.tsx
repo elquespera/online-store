@@ -29,6 +29,7 @@ const CartPromocode = ({
       'cart-promocodes',
       JSON.stringify([...appliedPromocodes, promo])
     );
+    setPromocode('');
   };
 
   const removePromoHandler = (apliedPromo: Promocode) => {

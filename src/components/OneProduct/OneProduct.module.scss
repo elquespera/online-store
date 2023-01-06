@@ -22,10 +22,15 @@
   height: 140px;
   border: 3px solid var(--card-title-bg-color);
   border-radius: 5px;
-}
-
-.product-image {
   margin: 5px 10px;
+  cursor: pointer;
+
+  @media screen and (max-width: vars.$tablet-breakpoint) {
+    width: 100px;
+    height: 100px;
+    margin: 5px 5px;
+  }
+
 }
 
 .item-info {
@@ -36,6 +41,7 @@
   flex-direction: column;
   text-align: center;
   margin: 5px 20px;
+  cursor: pointer;
 
   .description {
     margin: 10px 0;
@@ -49,6 +55,24 @@
     .rating {
       margin-right: 30px;
     }
+  }
+
+  @media screen and (max-width: 960px) {
+    width: 400px;
+  }
+
+  @media screen and (max-width: vars.$tablet-breakpoint) {
+    width: auto;
+    margin: 0;
+
+    .description,
+    .other {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 520px) {
+    
   }
 }
 
