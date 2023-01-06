@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { CartProductContent, CartProductsContext } from '../../context';
 import { CartProduct } from '../../types';
 import styles from './OneProduct.module.scss';
@@ -9,12 +9,8 @@ interface Props {
 }
 
 const OneProduct: React.FC<Props> = ({ product, index }: Props) => {
-  const {
-    cartProducts,
-    setCartProducts,
-    addToCart,
-    removeFromCart,
-  }: CartProductContent = useContext(CartProductsContext);
+  const { cartProducts, setCartProducts, removeFromCart }: CartProductContent =
+    useContext(CartProductsContext);
 
   const addQuantityHandler = () => {
     if (product.quantity + 1 > product.stock) {

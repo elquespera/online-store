@@ -1,3 +1,5 @@
+import { Promocode } from '../types';
+
 export const ProductFilterOptions = {
   categories: 'categories',
   brands: 'brands',
@@ -47,3 +49,8 @@ export const ProductSortValues = [
 export const ProductViewStyles = ['grid', 'compact', 'list'];
 
 export const PARAMS_SEPARATOR = '↕';
+
+export const ALL_PROMOCODES: Promocode[] = [
+  { promo: 'rs', title: 'Rolling Scopes School', discount: 10 },
+  { promo: 'epm', title: 'EPAM Systems', discount: 10 },
+];

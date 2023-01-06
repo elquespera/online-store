@@ -1,5 +1,9 @@
 .cart-page {
-    display: flex;
-    justify-content: space-between;
-    margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.cross-out {
+  text-decoration: line-through;
 }
