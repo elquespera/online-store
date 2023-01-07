@@ -8,12 +8,8 @@ import { Product } from '../../types';
 import styles from './DetailsPage.module.scss';
 
 const DetailsPage = () => {
-  const {
-    cartProducts,
-    setCartProducts,
-    addToCart,
-    removeFromCart,
-  }: CartProductContent = useContext(CartProductsContext);
+  const { cartProducts, addToCart, removeFromCart }: CartProductContent =
+    useContext(CartProductsContext);
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [product, setProduct] = useState<Product>();

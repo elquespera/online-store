@@ -7,7 +7,7 @@ import {
   ProductSortValues,
   ProductViewStyles,
 } from '../../constants';
-import { Product, SelectOption } from '../../types';
+import { MinMax, Product, SelectOption } from '../../types';
 import { ProductService } from '../../services/ProductService';
 import Card from '../../components/Card/Card';
 import RangeInput from '../../components/RangeInput/RangeInput';
@@ -36,6 +36,10 @@ const StoreFrontPage = () => {
   const [foundProducts, setFoundProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<SelectOption[]>([]);
   const [brands, setBrands] = useState<SelectOption[]>([]);
+  const [priceRange, setPriceRange] = useState<MinMax>();
+  const [priceValue, setPriceValue] = useState<MinMax>();
+  const [stockRange, setStockRange] = useState<MinMax>();
+  const [stockValue, setStockValue] = useState<MinMax>();
   const [searchStr, setSearchStr] = useState('');
   const [sortIndex, setSortIndex] = useState(0);
   const [viewStyle, setViewStyle] = useState(ProductViewStyles[0]);
@@ -44,17 +48,30 @@ const StoreFrontPage = () => {
   let productFilters = ProductService.generateProductFilters(searchParams);
 
   useEffect(() => {
-    setProducts(ProductService.getAll());
+    const products = ProductService.getAll();
+    const priceRange = ProductService.calculateRange(
+      products,
+      ProductCategoryFields.price
+    );
+    setPriceRange(priceRange);
+    setPriceValue({ ...priceRange });
+    const stockRange = ProductService.calculateRange(
+      products,
+      ProductCategoryFields.stock
+    );
+    setStockRange(stockRange);
+    setStockValue({ ...stockRange });
+
+    setProducts(products);
   }, []);
 
   useEffect(() => {
     updateFilters();
-  }, [products, foundProducts]);
+  }, [foundProducts]);
 
   useEffect(() => {
     productFilters = ProductService.generateProductFilters(searchParams);
     setFoundProducts(ProductService.filter(productFilters));
-    updateFilters();
   }, [searchParams]);
 
   const updateFilters = () => {
@@ -72,6 +89,20 @@ const StoreFrontPage = () => {
         foundProducts,
         ProductCategoryFields.brand,
         productFilters.brands
+      )
+    );
+    setPriceValue(
+      ProductService.calculateRange(
+        foundProducts,
+        ProductCategoryFields.price,
+        productFilters.price
+      )
+    );
+    setStockValue(
+      ProductService.calculateRange(
+        foundProducts,
+        ProductCategoryFields.stock,
+        productFilters.stock
       )
     );
     setSearchStr(productFilters.search || '');
@@ -103,6 +134,24 @@ const StoreFrontPage = () => {
     setSearchParams(searchParams);
   };
 
+  const priceValueChange = (value: MinMax) => {
+    writeSearchParams(
+      searchParams,
+      ProductFilterOptions.price,
+      ProductService.rangeToString(value)
+    );
+    setSearchParams(searchParams);
+  };
+
+  const stockValueChange = (value: MinMax) => {
+    writeSearchParams(
+      searchParams,
+      ProductFilterOptions.stock,
+      ProductService.rangeToString(value)
+    );
+    setSearchParams(searchParams);
+  };
+
   const searchInputChange = (str: string) => {
     writeSearchParams(searchParams, ProductFilterOptions.search, str);
     setSearchParams(searchParams);
@@ -124,7 +173,7 @@ const StoreFrontPage = () => {
 
   return (
     <div className={styles['store-front-page']}>
-      <Card title="Filters">
+      <Card title="Filters" big>
         <div className={styles['filters-panel']}>
           <div className={styles['buttons-panel']}>
             <button
@@ -157,11 +206,22 @@ const StoreFrontPage = () => {
             options={brands}
             onChange={filterChange}
           />
-          <RangeInput title="Price"></RangeInput>
-          <RangeInput title="Stock"></RangeInput>
+          <RangeInput
+            title="Price"
+            range={priceRange}
+            value={priceValue}
+            prefix="€"
+            onChange={priceValueChange}
+          ></RangeInput>
+          <RangeInput
+            title="Stock"
+            range={stockRange}
+            value={stockValue}
+            onChange={stockValueChange}
+          ></RangeInput>
         </div>
       </Card>
-      <Card title={`Products (${foundProducts.length})`}>
+      <Card title={`Products (${foundProducts.length})`} big>
         <div className={styles['search-panel']}>
           <input
             className={styles['search-input']}
