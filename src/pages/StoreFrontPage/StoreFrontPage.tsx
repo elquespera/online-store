@@ -173,7 +173,7 @@ const StoreFrontPage = () => {
 
   return (
     <div className={styles['store-front-page']}>
-      <Card title="Filters">
+      <Card title="Filters" big>
         <div className={styles['filters-panel']}>
           <div className={styles['buttons-panel']}>
             <button
@@ -221,7 +221,7 @@ const StoreFrontPage = () => {
           ></RangeInput>
         </div>
       </Card>
-      <Card title={`Products (${foundProducts.length})`}>
+      <Card title={`Products (${foundProducts.length})`} big>
         <div className={styles['search-panel']}>
           <input
             className={styles['search-input']}

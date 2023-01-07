@@ -5,6 +5,10 @@
   display: grid;
   grid-template-rows: auto 1fr;
 
+  &.big > .title {
+    font-size: 1.3em;
+  }
+
   .title {
     color: var(--card-title-color);
     background-color: var(--card-title-bg-color);
