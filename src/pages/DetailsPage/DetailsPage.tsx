@@ -8,8 +8,12 @@ import { Product } from '../../types';
 import styles from './DetailsPage.module.scss';
 
 const DetailsPage = () => {
-  const { cartProducts, setCartProducts }: CartProductContent =
-    useContext(CartProductsContext);
+  const {
+    cartProducts,
+    setCartProducts,
+    addToCart,
+    removeFromCart,
+  }: CartProductContent = useContext(CartProductsContext);
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [product, setProduct] = useState<Product>();
@@ -21,24 +25,10 @@ const DetailsPage = () => {
     }
   }, []);
 
-  const addToCart = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    if (product !== undefined) {
-      setCartProducts([...cartProducts, product]);
-    }
-  };
-
-  const removeFromCart = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    if (product !== undefined) {
-      setCartProducts([
-        ...cartProducts.filter((cartProduct) => cartProduct.id !== product.id),
-      ]);
-    }
-  };
-
   const buyHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    addToCart(event);
+    if (product) {
+      addToCart(event, product);
+    }
     navigate('/cart');
   };
 
@@ -79,15 +69,22 @@ const DetailsPage = () => {
           </div>
           <div className={styles['wrapper-price']}>
             <div className={styles.price}>€{product?.price}</div>
-            {id && cartProducts.find((p) => p.id === +id) ? (
-              <button onClick={removeFromCart} className={styles['btn']}>
-                {'REMOVE FROM CART'}
-              </button>
-            ) : (
-              <button onClick={addToCart} className={styles['btn']}>
-                {'ADD TO CART'}
-              </button>
-            )}
+            {product &&
+              (id && cartProducts.find((p) => p.id === +id) ? (
+                <button
+                  onClick={(e) => removeFromCart(e, product)}
+                  className={styles['btn']}
+                >
+                  {'REMOVE FROM CART'}
+                </button>
+              ) : (
+                <button
+                  onClick={(e) => addToCart(e, product)}
+                  className={styles['btn']}
+                >
+                  {'ADD TO CART'}
+                </button>
+              ))}
             <button onClick={buyHandler} className={styles['btn']}>
               BUY NOW
             </button>

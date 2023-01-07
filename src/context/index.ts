@@ -1,9 +1,17 @@
 import { createContext } from 'react';
-import { Product } from '../types';
+import { CartProduct, Product } from '../types';
 
 export type CartProductContent = {
-  cartProducts: Product[];
-  setCartProducts: (products: Product[]) => void;
+  cartProducts: CartProduct[];
+  setCartProducts: (products: CartProduct[]) => void;
+  addToCart: (
+    event: React.MouseEvent<HTMLButtonElement>,
+    data: Product
+  ) => void;
+  removeFromCart: (
+    event: React.MouseEvent<HTMLButtonElement>,
+    data: Product
+  ) => void;
 };
 
 export const CartProductsContext = createContext<CartProductContent>({
@@ -20,7 +28,10 @@ export const CartProductsContext = createContext<CartProductContent>({
       category: '',
       thumbnail: '',
       images: [''],
+      quantity: 0,
     },
   ],
   setCartProducts: () => ({}),
+  addToCart: () => ({}),
+  removeFromCart: () => ({}),
 });

@@ -14,6 +14,16 @@ export interface Product {
   images: string[];
 }
 
+export interface CartProduct extends Product {
+  quantity: number;
+}
+
+export interface Promocode {
+  promo: string;
+  title: string;
+  discount: number;
+}
+
 export interface ProductIndex {
   [state: string]: string | number | string[];
 }

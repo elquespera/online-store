@@ -12,30 +12,24 @@ interface Props {
 }
 
 const ProductItem = ({ data, style }: Props) => {
-  const { cartProducts, setCartProducts }: CartProductContent =
-    useContext(CartProductsContext);
+  const {
+    cartProducts,
+    setCartProducts,
+    addToCart,
+    removeFromCart,
+  }: CartProductContent = useContext(CartProductsContext);
 
-  const addToCart = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    setCartProducts([...cartProducts, data]);
-  };
-
-  const removeFromCart = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    setCartProducts([
-      ...cartProducts.filter((cartProduct) => cartProduct.id !== data.id),
-    ]);
-  };
-
-  const inCart = cartProducts.includes(data);
+  const inCart = cartProducts.find((product) => product.id === data.id);
 
   const generateButtons = () => {
     return (
       <div className={styles['buttons-panel']}>
         {inCart ? (
-          <button onClick={removeFromCart}>Remove from cart</button>
+          <button onClick={(e) => removeFromCart(e, data)}>
+            Remove from cart
+          </button>
         ) : (
-          <button onClick={addToCart}>Add to cart</button>
+          <button onClick={(e) => addToCart(e, data)}>Add to cart</button>
         )}
       </div>
     );
