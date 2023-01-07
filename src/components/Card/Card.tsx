@@ -5,6 +5,7 @@ interface CardProps {
   big?: boolean;
   warn?: boolean;
   hover?: boolean;
+  className?: string;
   children?: React.ReactNode;
 }
 
@@ -14,6 +15,7 @@ const Card: React.FC<CardProps> = ({
   big,
   warn,
   hover,
+  className,
 }: CardProps) => {
   return (
     <div
@@ -25,7 +27,9 @@ const Card: React.FC<CardProps> = ({
       }
     >
       <h4 className={styles.title}>{title}</h4>
-      <div className={styles.body}>{children}</div>
+      <div className={styles.body + (className ? ' ' + className : '')}>
+        {children}
+      </div>
     </div>
   );
 };

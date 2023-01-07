@@ -34,9 +34,12 @@ const ProductImage: React.FC<ProductImageProps> = ({
           />
         ))}
       </div>
-      <div className={styles['current-image']}>
-        <img src={currentImage} alt={`current image ${title}`} width="205" />
-      </div>
+      <img
+        className={styles['current-image']}
+        src={currentImage}
+        alt={`current image ${title}`}
+        width="205"
+      />
     </div>
   );
 };

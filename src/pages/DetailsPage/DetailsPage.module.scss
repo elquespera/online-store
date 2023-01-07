@@ -2,47 +2,42 @@
 
 .details-page {
   margin: 0 auto;
-  margin-top: 15px;
-  text-align: center;
+  max-width: vars.$max-width;
+  h2 {
+    font-size: 2em;
+    text-transform: capitalize;
+  }
 }
 
 .bread-crumbs {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 95%;
-  margin: 10px auto;
-
-  .store:hover {
-    color: #808080;
-    cursor: pointer;
+  align-self: center;
+  font-weight: 400;
+  color: var(--secondary-text);  
+  background-color: #f3f3f3;
+  padding: 0.5em 1.5em;
+  border-radius: 0 0 1em 1em;
+  
+  .store {
+    color: var(--main-text);
   }
 
-  @media screen and (max-width: vars.$mobile-breakpoint) {
+  .next::before {
+    content: '>>';
+  }
+
+  @media screen and (max-width: vars.$tablet-breakpoint) {
     flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
-    div:nth-child(even) {
+    .next {
       transform: rotate(90deg);
+      &::before {
+        content: '>';
+      }
     }
-  }
-}
-
-.details-product {
-  border: 2px solid var(--card-title-bg-color);
-  border-radius: 5px;
-  margin: 20px 5px;
-
-  .title {
-    font-size: 20px;
-    text-align: center;
-    border-bottom: 2px solid var(--card-title-bg-color);
-    background-color: var(--card-title-bg-color);
-  }
-
-  @media screen and (max-width: 960px) {
-    max-width: 600px;
-    margin: 20px auto;
   }
 }
 
@@ -51,54 +46,33 @@
 }
 
 .wrapper-info {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  padding: 1em;
+  gap: 2em;
 
-  @media screen and (max-width: 960px) {
-    flex-wrap: wrap;
-
-    .wrapper-price {
-      order: 0;
-    }
-
-    .property {
-      order: 1;
-    }
+  .properties {
+    display: flex;
+    flex-direction: column;
   }
 
-  @media screen and (max-width: 520px) {
-    justify-content: center;
+  @media screen and (max-width: vars.$tablet-breakpoint) {
+    grid-template-columns: auto;
   }
 }
 
 .wrapper-price {
-  min-width: 180px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 1em;
+  margin-top: 3em;
   order: 0;
 
   .price {
-    font-size: 30px;
-  }
-
-  .btn {
-    font-size: 18px;
-    border-radius: 5px;
-    padding: 5px;
-    margin: 5px 2px;
-
-  }
-
-  @media screen and (max-width: 520px) {
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 10px 5px;
-
-    .btn {
-      margin-left: 5px;
-      padding: 3px;
-    }
+    font-size: 2em;
+    font-weight: 400;
+    color: var(--secondary-text);
   }
 }
