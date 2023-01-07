@@ -6,9 +6,9 @@
   gap: 2em;
   align-items: flex-start;
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: vars.$max-width;
 
-  @media screen and (max-width: vars.$tablet-breakpoint) {
+  @media screen and (max-width: vars.$max-width) {
     grid-template-columns: 1fr;
   }
 }
@@ -20,17 +20,17 @@
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto;
   align-items: center;
-  padding: 0.5em;
+  padding: 0.3em 0.8em;
+  gap: 0.2em 1em;
   background-color: var(--card-title-bg-color);
   color: var(--card-title-color);
   font-size: 1.2rem;
 
-  @media screen and (max-width: 520px) {
-    flex-direction: column;
-    align-items: center;
+  @media screen and (max-width: vars.$tablet-breakpoint) {
+    grid-template-columns: auto;
   }
 }
 
