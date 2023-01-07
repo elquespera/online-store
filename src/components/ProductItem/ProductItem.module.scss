@@ -1,6 +1,4 @@
 .product {
-  overflow: hidden;
-
   .list {
     display: flex;
     align-items: center;
@@ -71,6 +69,15 @@
 }
 
 .in-cart {
-  border-radius: 0.5em;
-  box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+  .description {
+    background-color: var(--warn-color);
+  }
+  button {
+    background-color: var(--warn-color);
+  }
+
+  .list {
+    color: var(--warn-color);
+    font-weight: bold;
+  }
 }

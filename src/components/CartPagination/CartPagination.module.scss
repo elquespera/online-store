@@ -1,15 +1,13 @@
 .pagination {
   display: flex;
-  font-size: 20px;
 }
 
 .limit {
-
-
   .input-limit {
     text-align: center;
     border-radius: 5px;
-    border: 2px solid rgba(3, 102, 214, 0.3);
+    color: var(--card-title-color);
+    border: 2px solid var(--main-color);
     background-color: var(--card-title-bg-color);
     margin: 0 15px 0 5px;
     font-size: 16px;
@@ -22,6 +20,5 @@
     font-size: 16px;
     padding: 2px 5px;
     margin: 0 5px;
-    border: 2px solid rgba(3, 102, 214, 0.3)
   }
 }

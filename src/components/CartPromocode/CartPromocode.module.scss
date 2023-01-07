@@ -13,17 +13,15 @@
   margin-left: 10px;
 }
 
+.promocode {
+  padding: 1em;
+}
+
 .applied-promo {
-  font-size: 16px;
   border: 2px solid var(--card-title-bg-color);
   border-radius: 5px;
-  margin: 5px 10px 0 10px;
-
-  h4 {
-    margin-bottom: 5px;
-    background-color: var(--card-title-bg-color);
-  }
-
+  padding: 0.3em 0.8em;
+  
   .remove-promo {
     padding: 2px 5px;
     margin-left: 2px;

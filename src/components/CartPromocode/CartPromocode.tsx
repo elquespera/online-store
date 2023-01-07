@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from './CartPromocode.module.scss';
 import { ALL_PROMOCODES } from '../../constants';
 import { Promocode } from '../../types';
+import Card from '../Card/Card';
 
 interface Props {
   price: number;
@@ -56,52 +57,53 @@ const CartPromocode = ({
           ).toFixed(2)}
         </div>
       )}
-      <div className={styles.promocode}>
-        {appliedPromocodes.length !== 0 && (
-          <div className={styles['applied-promo']}>
-            <h4>Applied codes</h4>
-            {appliedPromocodes.map((apliedPromo) => (
-              <div key={apliedPromo.promo}>
-                {apliedPromo.title} - {apliedPromo.discount}% -
-                <button
-                  className={styles['remove-promo']}
-                  onClick={() => removePromoHandler(apliedPromo)}
-                >
-                  X
-                </button>
-              </div>
-            ))}
-          </div>
-        )}
-        <input
-          type="text"
-          className={styles['input-promocode']}
-          value={promocode}
-          onChange={(e) => setPromocode(e.target.value)}
-          placeholder="Enter promocode"
-        />
-        {ALL_PROMOCODES.map((promo) => {
-          if (promo.promo === promocode) {
-            return (
-              <div key={promo.promo}>
-                <div>
-                  {promo.title} - {promo.discount}%
-                  {!appliedPromocodes.find(
-                    (apPromo) => apPromo.title === promo.title
-                  ) && (
-                    <button
-                      className={styles['add-promo']}
-                      onClick={() => addPromoHandler(promo)}
-                    >
-                      ADD
-                    </button>
-                  )}
+      <Card title="Applied codes">
+        <div className={styles.promocode}>
+          {appliedPromocodes.length !== 0 && (
+            <div className={styles['applied-promo']}>
+              {appliedPromocodes.map((apliedPromo) => (
+                <div key={apliedPromo.promo}>
+                  {apliedPromo.title} - {apliedPromo.discount}% -
+                  <button
+                    className={styles['remove-promo']}
+                    onClick={() => removePromoHandler(apliedPromo)}
+                  >
+                    X
+                  </button>
                 </div>
-              </div>
-            );
-          }
-        })}
-      </div>
+              ))}
+            </div>
+          )}
+          <input
+            type="text"
+            className={styles['input-promocode']}
+            value={promocode}
+            onChange={(e) => setPromocode(e.target.value)}
+            placeholder="Enter promocode"
+          />
+          {ALL_PROMOCODES.map((promo) => {
+            if (promo.promo === promocode) {
+              return (
+                <div key={promo.promo}>
+                  <div>
+                    {promo.title} - {promo.discount}%
+                    {!appliedPromocodes.find(
+                      (apPromo) => apPromo.title === promo.title
+                    ) && (
+                      <button
+                        className={styles['add-promo']}
+                        onClick={() => addPromoHandler(promo)}
+                      >
+                        ADD
+                      </button>
+                    )}
+                  </div>
+                </div>
+              );
+            }
+          })}
+        </div>
+      </Card>
     </>
   );
 };

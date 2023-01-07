@@ -1,23 +1,37 @@
 :root {
+  --main-color: #1976D2;
+  --main-light-color: #2196F3;
+  --accent-color: #536DFE;
+  --warn-color: #f44a3e;
+  --divider-color: #BDBDBD;
+
+  --main-text: #212121;
+  --secondary-text: #757575;
+
   --header-height: 60px;
-  --header-bg-color: skyblue;
+  --header-bg-color: var(--main-color);
   --header-color: white;
   --logo-color: white;
   
   --footer-height: 40px;
-  --footer-bg-color: var(--header-bg-color);
+  --footer-bg-color: var(--main-color);
 
   --button-color: white;
-  --button-bg-color: skyblue;
-  --button-hover-bg-color: deepskyblue;
+  --button-bg-color: var(--accent-color);
 
-  --card-title-bg-color: skyblue;
+  --card-title-bg-color: var(--main-light-color);
   --card-title-color: white;
   --card-body-bg-color: white;
-  --card-body-color: black;
+  --card-body-color: #212121;
 
   --product-card-size: 300px;
   --product-card-compact-size: 180px;
+
+  --shadow-1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  --shadow-2: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  --shadow-3: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+
+  --hover-transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
 $mobile-breakpoint: 400px;
