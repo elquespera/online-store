@@ -1,7 +1,9 @@
 import {
+  MinMax,
   Product,
   ProductFilters,
   ProductIndex,
+  ProductRangeField,
   ProductSelectField,
   SelectOption,
 } from '../types';
@@ -33,6 +35,10 @@ export const ProductService = {
   },
 
   filter(filters: ProductFilters) {
+    const getProperRange = (range: MinMax) => {
+      return [Math.min(range.min, range.max), Math.max(range.min, range.max)];
+    };
+
     let products = this.getAll();
     if (filters.categories)
       products = products.filter((product) =>
@@ -43,6 +49,20 @@ export const ProductService = {
       products = products.filter((product) =>
         filters.brands?.includes(product.brand)
       );
+
+    if (filters.price) {
+      const [min, max] = getProperRange(filters.price);
+      products = products.filter(
+        (product) => product.price >= min && product.price <= max
+      );
+    }
+
+    if (filters.stock) {
+      const [min, max] = getProperRange(filters.stock);
+      products = products.filter(
+        (product) => product.stock >= min && product.stock <= max
+      );
+    }
 
     if (typeof filters.search === 'string') {
       const searchStr = filters.search.toLowerCase();
@@ -134,5 +154,24 @@ export const ProductService = {
       .filter((option) => option.checked)
       .map(({ title }) => title)
       .join(PARAMS_SEPARATOR);
+  },
+
+  calculateRange(
+    products: Product[],
+    field: ProductRangeField,
+    current?: MinMax
+  ): MinMax {
+    if (current) return { ...current };
+    const range = { min: +Infinity, max: -Infinity };
+    products.forEach((product) => {
+      range.min = Math.min(product[field], range.min);
+      range.max = Math.max(product[field], range.max);
+    });
+    return range;
+  },
+
+  rangeToString(range: MinMax): string {
+    if (!range) return '';
+    return `${range.min}${PARAMS_SEPARATOR}${range.max}`;
   },
 };

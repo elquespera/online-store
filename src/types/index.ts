@@ -28,7 +28,7 @@ export interface ProductIndex {
   [state: string]: string | number | string[];
 }
 
-interface MinMax {
+export interface MinMax {
   min: number;
   max: number;
 }
@@ -53,3 +53,7 @@ export interface SelectOption {
   found: number;
   max: number;
 }
+
+export type ProductRangeField =
+  | ProductCategoryFields.price
+  | ProductCategoryFields.stock;

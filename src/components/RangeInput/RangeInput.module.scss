@@ -1,23 +1,41 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+}
+.labels {
+  display: flex;
+  justify-content: space-between;
+}
 .range-input {
-  input[type="range"] {
+  --thumb-size: 1.7em;
+
+  padding: calc(var(--thumb-size) * 0.75) 0;
+  position: relative;
+
+  .input {
     -webkit-appearance: none; 
     appearance: none;
+    width: 100%;
     height: 2px;
-    // width: 100%;
     position: absolute;
-    background-color: #C6C6C6;
+    background-color: lightgray;
     pointer-events: none;
+  }
+
+  .input.second {
+    background-color: transparent;
   }
 
   .input::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     pointer-events: all;
-    width: 24px;
-    height: 24px;
+    width: var(--thumb-size);
+    height: var(--thumb-size);
     background-color: #fff;
     border-radius: 50%;
-    box-shadow: 0 0 0 1px #C6C6C6;
+    border: 1px solid lightgray;
     cursor: pointer;
   }
   
@@ -25,20 +43,20 @@
     -webkit-appearance: none;
     appearance: none;
     pointer-events: all;
-    width: 24px;
-    height: 24px;
+    width: var(--thumb-size);
+    height: var(--thumb-size);
     background-color: #fff;
     border-radius: 50%;
-    box-shadow: 0 0 0 1px #C6C6C6;
+    border: 1px solid lightgray;
     cursor: pointer;  
   }
   
   .input::-webkit-slider-thumb:hover {
-    background: #f7f7f7;
+    background: #f3f3f3;
+    box-shadow: 0 0 0.5em var(--button-bg-color);
   }
   
   .input::-webkit-slider-thumb:active {
-    box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
-    -webkit-box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
-  }  
+    box-shadow: 0 0 0.5em var(--button-hover-bg-color);
+  }
 }

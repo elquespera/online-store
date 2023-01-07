@@ -13,6 +13,8 @@ export const ProductFilterOptions = {
 export enum ProductCategoryFields {
   category = 'category',
   brand = 'brand',
+  price = 'price',
+  stock = 'stock',
 }
 
 export const ProductSearchableFields = {
