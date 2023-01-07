@@ -2,14 +2,14 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { CartProductContent, CartProductsContext } from '../../context';
 import { CartProduct } from '../../types';
-import styles from './OneProduct.module.scss';
+import styles from './CartProductItem.module.scss';
 
 interface Props {
   product: CartProduct;
   index: number;
 }
 
-const OneProduct: React.FC<Props> = ({ product, index }: Props) => {
+const CartProductItem: React.FC<Props> = ({ product, index }: Props) => {
   const { cartProducts, setCartProducts, removeFromCart }: CartProductContent =
     useContext(CartProductsContext);
   const navigate = useNavigate();
@@ -91,4 +91,4 @@ const OneProduct: React.FC<Props> = ({ product, index }: Props) => {
   );
 };
 
-export default OneProduct;
+export default CartProductItem;

@@ -1,8 +1,9 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
+import Card from '../../components/Card/Card';
 import CartPagination from '../../components/CartPagination/CartPagination';
 import CartPromocode from '../../components/CartPromocode/CartPromocode';
-import OneProduct from '../../components/OneProduct/OneProduct';
+import CartProductItem from '../../components/CartProductItem/CartProductItem';
 import OrderModal from '../../components/OrderModal/OrderModal';
 import { CartProductContent, CartProductsContext } from '../../context';
 import { CartProduct, Promocode } from '../../types';
@@ -36,7 +37,7 @@ const CartPage = () => {
     <div className={styles['cart-page']}>
       <div className={styles['cart-products']}>
         <div className={styles.header}>
-          <h2>Products In Cart</h2>
+          <h3>Products In Cart</h3>
           <CartPagination
             setLimit={setLimit}
             limit={limit}
@@ -50,34 +51,41 @@ const CartPage = () => {
             return;
           }
           return (
-            <OneProduct key={product.id} product={product} index={index + 1} />
+            <CartProductItem
+              key={product.id}
+              product={product}
+              index={index + 1}
+            />
           );
         })}
       </div>
-      <div className={styles['cart-buy']}>
-        <h3>Summary</h3>
-        <div className={styles['quantity-products']}>
-          Products: {cartProducts.length}
+      <Card title="Summary" big>
+        <div className={styles['cart-buy']}>
+          <div>
+            <div className={styles['quantity-products']}>
+              Products: {cartProducts.length}
+            </div>
+            <div
+              className={
+                appliedPromocodes.length ? styles['old-price'] : styles.price
+              }
+            >
+              Total: €{countTotalPrice()}
+            </div>
+          </div>
+          <CartPromocode
+            price={countTotalPrice()}
+            appliedPromocodes={appliedPromocodes}
+            setAppliedPromocodes={setAppliedPromocodes}
+          />
+          <button
+            className={styles['btn-modal']}
+            onClick={() => setOrderModalOpened(true)}
+          >
+            Buy now
+          </button>
         </div>
-        <div
-          className={
-            appliedPromocodes.length ? styles['old-price'] : styles.price
-          }
-        >
-          Total: €{countTotalPrice()}
-        </div>
-        <CartPromocode
-          price={countTotalPrice()}
-          appliedPromocodes={appliedPromocodes}
-          setAppliedPromocodes={setAppliedPromocodes}
-        />
-        <button
-          className={styles['btn-modal']}
-          onClick={() => setOrderModalOpened(true)}
-        >
-          Buy now
-        </button>
-      </div>
+      </Card>
       <OrderModal
         isOpened={orderModalOpened}
         onSuccess={orderModalOnSuccess}

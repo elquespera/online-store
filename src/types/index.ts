@@ -1,4 +1,4 @@
-import { ProductCategoryFields, ProductSortValues } from '../constants';
+import { ProductCategoryFields } from '../constants';
 
 export interface Product {
   id: number;

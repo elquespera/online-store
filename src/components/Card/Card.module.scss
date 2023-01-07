@@ -1,9 +1,14 @@
 .card {
-  border: 1px solid var(--card-title-bg-color);
   border-radius: 0.5em;
   overflow: hidden;
   display: grid;
   grid-template-rows: auto 1fr;
+  box-shadow: var(--shadow-2);
+
+
+  &.big {
+    box-shadow: var(--shadow-3);
+  }
 
   &.big > .title {
     font-size: 1.3em;
@@ -17,9 +22,22 @@
     white-space: nowrap;
     text-overflow: ellipsis;
   }
+
+  &.warn .title {
+    background-color: var(--warn-color); 
+  }
+
   .body {
     color: var(--card-body-color);
     background-color: var(--card-body-bg-color);
     overflow: auto;
+  }
+
+  &.hover {
+    transition: var(--hover-transition);
+    &:hover {
+      box-shadow: var(--shadow-3);
+      transform: scale(1.03);
+    }
   }
 }

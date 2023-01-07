@@ -15,7 +15,8 @@ const ProductItem = ({ data, style }: Props) => {
   const { cartProducts, addToCart, removeFromCart }: CartProductContent =
     useContext(CartProductsContext);
 
-  const inCart = cartProducts.find((product) => product.id === data.id);
+  const inCart =
+    cartProducts.find((product) => product.id === data.id) !== undefined;
 
   const generateButtons = () => {
     return (
@@ -48,7 +49,7 @@ const ProductItem = ({ data, style }: Props) => {
             {generateButtons()}
           </div>
         ) : (
-          <Card title={data.title}>
+          <Card title={data.title} warn={inCart} hover>
             <div
               className={
                 style === ProductViewStyles[1] ? styles.compact : styles.grid
