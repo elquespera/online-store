@@ -7,10 +7,17 @@ interface RangeInputProps {
   title?: string;
   range?: MinMax;
   value?: MinMax;
+  prefix?: string;
   onChange?: (value: MinMax) => void;
 }
 
-const RangeInput = ({ title, range, value, onChange }: RangeInputProps) => {
+const RangeInput = ({
+  title,
+  range,
+  value,
+  prefix,
+  onChange,
+}: RangeInputProps) => {
   const [current, setCurrent] = useState<MinMax>();
 
   useEffect(() => {
@@ -38,8 +45,14 @@ const RangeInput = ({ title, range, value, onChange }: RangeInputProps) => {
             <div>NOT FOUND</div>
           ) : (
             <div className={styles['labels']}>
-              <span>{Math.min(current?.min || 0, current?.max || 100)}</span>
-              <span>{Math.max(current?.min || 0, current?.max || 100)}</span>
+              <span>
+                {prefix}
+                {Math.min(current?.min || 0, current?.max || 100)}
+              </span>
+              <span>
+                {prefix}
+                {Math.max(current?.min || 0, current?.max || 100)}
+              </span>
             </div>
           )}
         </div>

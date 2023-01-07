@@ -210,6 +210,7 @@ const StoreFrontPage = () => {
             title="Price"
             range={priceRange}
             value={priceValue}
+            prefix="€"
             onChange={priceValueChange}
           ></RangeInput>
           <RangeInput
