@@ -12,12 +12,8 @@ interface Props {
 }
 
 const ProductItem = ({ data, style }: Props) => {
-  const {
-    cartProducts,
-    setCartProducts,
-    addToCart,
-    removeFromCart,
-  }: CartProductContent = useContext(CartProductsContext);
+  const { cartProducts, addToCart, removeFromCart }: CartProductContent =
+    useContext(CartProductsContext);
 
   const inCart = cartProducts.find((product) => product.id === data.id);
 
