@@ -11,10 +11,10 @@ import Card from '../../components/Card/Card';
 
 const DetailsPage = () => {
   const {
-    cartProducts,
     addToCart,
     removeFromCart,
     setShowOrderModal,
+    productInCart,
   }: CartProductContent = useContext(CartProductsContext);
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -28,14 +28,12 @@ const DetailsPage = () => {
   }, []);
 
   const buyHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (product) {
+    if (product && !productInCart(product)) {
       addToCart(event, product);
     }
     setShowOrderModal(true);
     navigate('/cart');
   };
-
-  const inCart = id && cartProducts.find((product) => product.id === +id);
 
   return (
     <div className={styles['details-page']}>
@@ -75,7 +73,7 @@ const DetailsPage = () => {
             <div className={styles['wrapper-price']}>
               <div className={styles.price}>€{product?.price}</div>
               {product &&
-                (inCart ? (
+                (productInCart(product) ? (
                   <button
                     onClick={(e) => removeFromCart(e, product)}
                     className={styles['btn']}

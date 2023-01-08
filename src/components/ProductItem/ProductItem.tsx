@@ -12,16 +12,13 @@ interface Props {
 }
 
 const ProductItem = ({ data, style }: Props) => {
-  const { cartProducts, addToCart, removeFromCart }: CartProductContent =
+  const { addToCart, removeFromCart, productInCart }: CartProductContent =
     useContext(CartProductsContext);
-
-  const inCart =
-    cartProducts.find((product) => product.id === data.id) !== undefined;
 
   const generateButtons = () => {
     return (
       <div className={styles['buttons-panel']}>
-        {inCart ? (
+        {productInCart(data) ? (
           <button onClick={(e) => removeFromCart(e, data)}>
             Remove from cart
           </button>
@@ -37,7 +34,7 @@ const ProductItem = ({ data, style }: Props) => {
       <div
         className={
           styles.product +
-          (inCart ? ' ' + styles['in-cart'] : '') +
+          (productInCart(data) ? ' ' + styles['in-cart'] : '') +
           ' ' +
           styles[style]
         }
@@ -49,7 +46,7 @@ const ProductItem = ({ data, style }: Props) => {
             {generateButtons()}
           </div>
         ) : (
-          <Card title={data.title} warn={inCart} hover>
+          <Card title={data.title} warn={productInCart(data)} hover>
             <div
               className={
                 style === ProductViewStyles[1] ? styles.compact : styles.grid
