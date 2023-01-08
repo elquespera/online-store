@@ -14,6 +14,7 @@ export type CartProductContent = {
     event: React.MouseEvent<HTMLButtonElement>,
     data: Product
   ) => void;
+  productInCart: (product?: Product) => boolean;
 };
 
 export const CartProductsContext = createContext<CartProductContent>({
@@ -23,4 +24,5 @@ export const CartProductsContext = createContext<CartProductContent>({
   setCartProducts: () => ({}),
   addToCart: () => ({}),
   removeFromCart: () => ({}),
+  productInCart: () => false,
 });

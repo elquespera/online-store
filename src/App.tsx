@@ -32,6 +32,11 @@ const App = () => {
     localStorage.setItem('cart-items', JSON.stringify(newProductsInCart));
   };
 
+  const productInCart = (product?: Product): boolean => {
+    if (!product) return false;
+    return cartProducts.find(({ id }) => product.id === id) !== undefined;
+  };
+
   useEffect(() => {
     const item = localStorage.getItem('cart-items');
     if (item) {
@@ -47,6 +52,7 @@ const App = () => {
           setCartProducts,
           removeFromCart,
           addToCart,
+          productInCart,
           showOrderModal,
           setShowOrderModal,
         }}
