@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
+import { CART_ITEMS_KEY } from './constants';
 import { CartProductsContext } from './context';
 import { CartProduct, Product } from './types';
 
@@ -17,7 +18,7 @@ const App = () => {
     event.preventDefault();
     const newProductsInCart = [...cartProducts, { ...data, quantity: 1 }];
     setCartProducts(newProductsInCart);
-    localStorage.setItem('cart-items', JSON.stringify(newProductsInCart));
+    localStorage.setItem(CART_ITEMS_KEY, JSON.stringify(newProductsInCart));
   };
 
   const removeFromCart = (
@@ -29,7 +30,7 @@ const App = () => {
       ...cartProducts.filter((cartProduct) => cartProduct.id !== data.id),
     ];
     setCartProducts(newProductsInCart);
-    localStorage.setItem('cart-items', JSON.stringify(newProductsInCart));
+    localStorage.setItem(CART_ITEMS_KEY, JSON.stringify(newProductsInCart));
   };
 
   const productInCart = (product?: Product): boolean => {
@@ -38,7 +39,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    const item = localStorage.getItem('cart-items');
+    const item = localStorage.getItem(CART_ITEMS_KEY);
     if (item) {
       setCartProducts(JSON.parse(item));
     }
