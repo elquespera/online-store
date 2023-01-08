@@ -102,6 +102,9 @@ const CartPromocode = ({
               );
             }
           })}
+          <div className={styles['test-promo']}>
+            {`Promocode for test 'rs', 'epm' 'free'`}
+          </div>
         </div>
       </Card>
     </>
