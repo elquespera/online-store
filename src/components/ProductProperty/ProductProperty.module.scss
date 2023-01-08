@@ -1,14 +1,13 @@
 .property {
-  max-width: 440px;
-  text-align: center;
-  font-size: 18px;
-  border: 1px solid rgb(52, 153, 72);
-  border-radius: 5px;
-  margin: 10px;
+  padding: 0.5em 1em;
+  border-bottom: 1px solid var(--divider-color);
 }
 
 .name {
-  padding: 2px;
-  background-color: skyblue;
-  border-radius: 5px 5px 0 0;
+  text-transform: capitalize;
+  font-weight: 400;
+}
+
+.value {
+  color: var(--secondary-text);
 }

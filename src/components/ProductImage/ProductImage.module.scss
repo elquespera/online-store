@@ -1,36 +1,30 @@
 .wrapper {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  @media screen and (max-width: 520px) {
-    width: 300px;
-  }
+  flex-direction: column;
+  gap: 0.5em;
+  max-width: 460px;
+  overflow: hidden;
+}
+
+.current-image  {
+  width: 100%;
+  object-fit: cover;
 }
 
 .images {
   display: flex;
-  flex-direction: column;
-  margin: 0 20px;
+  gap: 0.5em;
+  overflow: auto;
 
-  .image {
-    border: 2px solid rgb(52, 153, 72);
+  .image { 
+    border: 1px solid var(--divider-color);
     border-radius: 5px;
-    margin: 5px 0;
+    object-fit: cover;
     cursor: pointer;
+    width: 60px;
+    height: 60px;
+    &:hover {
+      border: 1px solid var(--main-color);
+    }
   }
-
-  @media screen and (max-width: 520px) {
-    margin: 0 5px;
-  }
-}
-
-.current-image  {
-  margin: 20px 0;
-  
-  img {
-    border: 2px solid rgb(52, 153, 72);
-    border-radius: 5px;
-  }
-
-
 }

@@ -4,6 +4,7 @@
   display: grid;
   grid-template-columns: auto auto 1fr auto;
   align-items: center;
+  gap: 1em;
   padding: 1em;
   border-bottom: 1px solid var(--divider-color);
 
@@ -27,15 +28,13 @@
   width: 160px;
   height: 140px;
   border: 3px solid var(--card-title-bg-color);
-  border-radius: 5px;
-  margin: 5px 10px;
+  border-radius: 0.2em;
   cursor: pointer;
 
   @media screen and (max-width: vars.$tablet-breakpoint) {
-    width: 100px;
-    height: 80px;
+    width: 80px;
+    height: 60px;
   }
-
   @media screen and (max-width: vars.$mobile-breakpoint) {
     display: none;
   }
@@ -49,9 +48,15 @@
   text-align: center;
   margin: 5px 20px;
   cursor: pointer;
+  @media screen and (max-width: vars.$tablet-breakpoint) {
+   align-items: flex-start;
+  }
 
   .title {
     font-weight: bold;
+    @media screen and (max-width: vars.$tablet-breakpoint) {
+      text-align: left;
+    }
   }
 
   .description {
@@ -65,13 +70,6 @@
     justify-content: space-between;
     gap: 2em;
     color: var(--secondary-text);
-
-    .rating {
-    }
-  }
-
-  @media screen and (max-width: 960px) {
-    width: 400px;
   }
 
   @media screen and (max-width: vars.$tablet-breakpoint) {
@@ -83,15 +81,12 @@
       display: none;
     }
   }
-
-  @media screen and (max-width: 520px) {
-    
-  }
 }
 
 .wrapper-quantity {
-  min-width: 90px;
   text-align: center;
+  margin-left: auto;
+  min-width: 80px;
 
   .quantity {
     margin: 15px 0;

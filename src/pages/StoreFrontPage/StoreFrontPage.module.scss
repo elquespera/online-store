@@ -3,7 +3,7 @@
 .store-front-page {
   display: grid;
   grid-template-columns: auto 2fr;
-  gap: 1em;
+  gap: 2em;
   align-items: flex-start;
   .filters-panel {
     padding: 1em;
@@ -27,8 +27,11 @@
           background-image: url('../../assets/icons/copy.svg');
         }
 
-        &.copied::before {
-          background-image: url('../../assets/icons/check.svg');
+        &.copied {
+          background-color: var(--warn-color);
+          &::before {
+            background-image: url('../../assets/icons/check.svg');
+          }
         }
 
         &.copied + .copy-hint {
