@@ -15,7 +15,7 @@ const Footer = () => {
         <span>2pageniy</span>
       </a>
       <a href="https://rs.school/js/">
-        <img src={rssIcon} alt="2pageniy's github" />
+        <img src={rssIcon} alt="RS School" />
       </a>
     </footer>
   );
