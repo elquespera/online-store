@@ -8,7 +8,7 @@ import { Product } from '../../types';
 import styles from './DetailsPage.module.scss';
 import { Link } from 'react-router-dom';
 import Card from '../../components/Card/Card';
-import { CURRENCY_SIGN } from '../../constants';
+import { CURRENCY_SIGN, ProductHiddenFields } from '../../constants';
 
 const DetailsPage = () => {
   const {
@@ -17,10 +17,9 @@ const DetailsPage = () => {
     setShowOrderModal,
     productInCart,
   }: CartProductContent = useContext(CartProductsContext);
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState<Product>();
-  const unusedProperties = ['id', 'title', 'thumbnail', 'images', 'price'];
 
   useEffect(() => {
     if (typeof id === 'string') {
@@ -59,16 +58,14 @@ const DetailsPage = () => {
             <ul>
               {product &&
                 Object.entries(product).map((prop) => {
-                  if (unusedProperties.includes(prop[0])) {
-                    return;
-                  }
-                  return (
-                    <ProductProperty
-                      key={prop[0]}
-                      name={prop[0]}
-                      value={prop[1]}
-                    />
-                  );
+                  if (!ProductHiddenFields.includes(prop[0]))
+                    return (
+                      <ProductProperty
+                        key={prop[0]}
+                        name={prop[0]}
+                        value={prop[1]}
+                      />
+                    );
                 })}
             </ul>
             <div className={styles['wrapper-price']}>
@@ -88,9 +85,7 @@ const DetailsPage = () => {
                     ADD TO CART
                   </button>
                 ))}
-              <button onClick={buyHandler} className={styles['btn']}>
-                BUY NOW
-              </button>
+              <button onClick={buyHandler}>BUY NOW</button>
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './CartPromocode.module.scss';
-import { ALL_PROMOCODES, CURRENCY_SIGN } from '../../constants';
+import { ALL_PROMOCODES, CURRENCY_SIGN, PROMOCODE_KEY } from '../../constants';
 import { Promocode } from '../../types';
 import Card from '../Card/Card';
 
@@ -18,7 +18,7 @@ const CartPromocode = ({
   const [promocode, setPromocode] = useState('');
 
   useEffect(() => {
-    const storagePromocode = localStorage.getItem('cart-promocodes');
+    const storagePromocode = localStorage.getItem(PROMOCODE_KEY);
     if (storagePromocode) {
       setAppliedPromocodes(JSON.parse(storagePromocode));
     }
@@ -27,7 +27,7 @@ const CartPromocode = ({
   const addPromoHandler = (promo: Promocode) => {
     setAppliedPromocodes([...appliedPromocodes, promo]);
     localStorage.setItem(
-      'cart-promocodes',
+      PROMOCODE_KEY,
       JSON.stringify([...appliedPromocodes, promo])
     );
     setPromocode('');
@@ -38,7 +38,7 @@ const CartPromocode = ({
       (p) => p.promo !== apliedPromo.promo
     );
     setAppliedPromocodes(updatePromo);
-    localStorage.setItem('cart-promocodes', JSON.stringify(updatePromo));
+    localStorage.setItem(PROMOCODE_KEY, JSON.stringify(updatePromo));
   };
 
   return (
@@ -104,7 +104,8 @@ const CartPromocode = ({
             }
           })}
           <div className={styles['test-promo']}>
-            {`Promocode for test 'rs', 'epm' 'free'`}
+            Available promocodes:{' '}
+            {ALL_PROMOCODES.map(({ promo }) => `'${promo}'`).join(', ')}
           </div>
         </div>
       </Card>

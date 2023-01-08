@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { CART_LIMIT_KEY, CART_PAGE_KEY } from '../../constants';
 import styles from './CartPagination.module.scss';
 
 type Props = {
@@ -27,24 +28,24 @@ const CartPagination = ({
     if (cartProductsLength && page >= totalPages) {
       setPage(totalPages);
       currentPage = totalPages;
-      localStorage.setItem('cart-page', totalPages.toString());
+      localStorage.setItem(CART_PAGE_KEY, totalPages.toString());
     }
     setCartParams({ page: currentPage.toString(), limit: limit.toString() });
   }, [limit, cartProductsLength]);
 
   useEffect(() => {
     const limitCart =
-      cartParams.get('limit') || localStorage.getItem('cart-limit');
+      cartParams.get('limit') || localStorage.getItem(CART_LIMIT_KEY);
     const pageCart =
-      cartParams.get('page') || localStorage.getItem('cart-page');
+      cartParams.get('page') || localStorage.getItem(CART_PAGE_KEY);
     if (limitCart) {
       setLimit(+limitCart);
-      localStorage.setItem('cart-limit', limitCart);
+      localStorage.setItem(CART_LIMIT_KEY, limitCart);
     }
 
     if (pageCart) {
       setPage(+pageCart);
-      localStorage.setItem('cart-page', pageCart);
+      localStorage.setItem(CART_PAGE_KEY, pageCart);
     }
 
     if (pageCart && limitCart) {
@@ -59,7 +60,7 @@ const CartPagination = ({
       valueTarget = '1';
     }
     setLimit(+valueTarget);
-    localStorage.setItem('cart-limit', valueTarget);
+    localStorage.setItem(CART_LIMIT_KEY, valueTarget);
     setCartParams({ page: page.toString(), limit: valueTarget });
   };
 
@@ -81,7 +82,7 @@ const CartPagination = ({
 
   const changePage = (page: number) => {
     setPage(page);
-    localStorage.setItem('cart-page', page.toString());
+    localStorage.setItem(CART_PAGE_KEY, page.toString());
     setCartParams({ page: page.toString(), limit: limit.toString() });
   };
 

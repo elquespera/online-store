@@ -29,11 +29,10 @@ const OrderInput = ({
     }
   };
 
-  let containterClass = styles['order-input'];
-  if (!valid) containterClass += ' ' + styles.invalid;
-
   return (
-    <div className={containterClass}>
+    <div
+      className={styles['order-input'] + (valid ? '' : ' ' + styles.invalid)}
+    >
       <input
         ref={inputRef}
         placeholder={placeholder}

@@ -28,7 +28,6 @@ const ProductImage: React.FC<ProductImageProps> = ({
             key={image}
             src={image}
             alt={`product ${title}`}
-            width="60"
             className={styles.image}
             onClick={(e) => changeImageHandler(e)}
           />
@@ -38,7 +37,6 @@ const ProductImage: React.FC<ProductImageProps> = ({
         className={styles['current-image']}
         src={currentImage}
         alt={`current image ${title}`}
-        width="205"
       />
     </div>
   );
