@@ -1,30 +1,40 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import Card from '../../components/Card/Card';
 import CartPagination from '../../components/CartPagination/CartPagination';
 import CartPromocode from '../../components/CartPromocode/CartPromocode';
 import CartProductItem from '../../components/CartProductItem/CartProductItem';
 import OrderModal from '../../components/OrderModal/OrderModal';
-import { CartProductContent, CartProductsContext } from '../../context';
-import { CartProduct, Promocode } from '../../types';
+import { CartProductsContext } from '../../context';
+import { Promocode } from '../../types';
 import styles from './CartPage.module.scss';
 
 const CartPage = () => {
+  const { cartProducts, showOrderModal, setShowOrderModal } =
+    useContext(CartProductsContext);
   const [orderModalOpened, setOrderModalOpened] = useState(false);
   const navigate = useNavigate();
-  const { cartProducts }: CartProductContent = useContext(CartProductsContext);
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(3);
   const [appliedPromocodes, setAppliedPromocodes] = useState<Promocode[]>([]);
 
-  const orderModalOnSuccess = () => {
+  useEffect(() => {
+    setOrderModalOpened(showOrderModal);
+  }, []);
+
+  const closeDialog = () => {
+    setShowOrderModal(false);
     setOrderModalOpened(false);
+  };
+
+  const orderModalOnSuccess = () => {
+    closeDialog();
     navigate('/');
   };
 
   const countTotalPrice = () => {
     return cartProducts.reduce(
-      (sum: number, elem: CartProduct) => sum + elem.price * elem.quantity,
+      (sum, elem) => sum + elem.price * elem.quantity,
       0
     );
   };
@@ -89,7 +99,7 @@ const CartPage = () => {
       <OrderModal
         isOpened={orderModalOpened}
         onSuccess={orderModalOnSuccess}
-        onCancel={() => setOrderModalOpened(false)}
+        onCancel={closeDialog}
       />
     </div>
   );
