@@ -3,6 +3,8 @@ import { CartProduct, Product } from '../types';
 
 export type CartProductContent = {
   cartProducts: CartProduct[];
+  showOrderModal: boolean;
+  setShowOrderModal: (show: boolean) => void;
   setCartProducts: (products: CartProduct[]) => void;
   addToCart: (
     event: React.MouseEvent<HTMLButtonElement>,
@@ -12,26 +14,15 @@ export type CartProductContent = {
     event: React.MouseEvent<HTMLButtonElement>,
     data: Product
   ) => void;
+  productInCart: (product?: Product) => boolean;
 };
 
 export const CartProductsContext = createContext<CartProductContent>({
-  cartProducts: [
-    {
-      id: 1,
-      title: '',
-      description: '',
-      price: 0,
-      discountPercentage: 0,
-      rating: 0,
-      stock: 0,
-      brand: '',
-      category: '',
-      thumbnail: '',
-      images: [''],
-      quantity: 0,
-    },
-  ],
+  cartProducts: [],
+  showOrderModal: false,
+  setShowOrderModal: () => ({}),
   setCartProducts: () => ({}),
   addToCart: () => ({}),
   removeFromCart: () => ({}),
+  productInCart: () => false,
 });

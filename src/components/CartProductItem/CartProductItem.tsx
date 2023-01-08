@@ -1,5 +1,6 @@
 import { useContext } from 'react';
-import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
+import { CART_ITEMS_KEY } from '../../constants';
 import { CartProductContent, CartProductsContext } from '../../context';
 import { CartProduct } from '../../types';
 import styles from './CartProductItem.module.scss';
@@ -12,7 +13,6 @@ interface Props {
 const CartProductItem: React.FC<Props> = ({ product, index }: Props) => {
   const { cartProducts, setCartProducts, removeFromCart }: CartProductContent =
     useContext(CartProductsContext);
-  const navigate = useNavigate();
 
   const addQuantityHandler = () => {
     if (product.quantity + 1 > product.stock) {
@@ -25,7 +25,7 @@ const CartProductItem: React.FC<Props> = ({ product, index }: Props) => {
       return prod;
     });
     setCartProducts(newProductsInCart);
-    localStorage.setItem('cart-items', JSON.stringify(newProductsInCart));
+    localStorage.setItem(CART_ITEMS_KEY, JSON.stringify(newProductsInCart));
   };
 
   const removeQuantityHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -40,31 +40,30 @@ const CartProductItem: React.FC<Props> = ({ product, index }: Props) => {
       return prod;
     });
     setCartProducts(newProductsInCart);
-    localStorage.setItem('cart-items', JSON.stringify(newProductsInCart));
-  };
-
-  const navigateToDetailsPage = () => {
-    navigate(`/product-details/${product.id}`);
+    localStorage.setItem(CART_ITEMS_KEY, JSON.stringify(newProductsInCart));
   };
 
   return (
     <div className={styles.product}>
       <div className={styles.order}>{index}</div>
-      <img
-        className={styles['product-image']}
-        src={product.images[0]}
-        alt={`image ${product.title}`}
-        onClick={navigateToDetailsPage}
-      />
-      <div className={styles['item-info']} onClick={navigateToDetailsPage}>
-        <div className={styles.title}>{product.title}</div>
-        <div className={styles.description}>{product.description}</div>
-        <div className={styles.other}>
-          <div className={styles.rating}>Rating: {product.rating}</div>
-          <div className={styles.discount}>
-            Discount: {product.discountPercentage}%
+      <Link to={`/product-details/${product.id}`}>
+        <img
+          className={styles['product-image']}
+          src={product.images[0]}
+          alt={`image ${product.title}`}
+        />
+      </Link>
+      <div className={styles['item-info']}>
+        <Link to={`/product-details/${product.id}`}>
+          <div className={styles.title}>{product.title}</div>
+          <div className={styles.description}>{product.description}</div>
+          <div className={styles.other}>
+            <div className={styles.rating}>Rating: {product.rating}</div>
+            <div className={styles.discount}>
+              Discount: {product.discountPercentage}%
+            </div>
           </div>
-        </div>
+        </Link>
       </div>
       <div className={styles['wrapper-quantity']}>
         <div className={styles.stock}>Stock: {product.stock}</div>
