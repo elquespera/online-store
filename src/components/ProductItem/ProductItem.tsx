@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CartProductContent, CartProductsContext } from '../../context';
 import { Product } from '../../types';
-import { ProductViewStyles } from '../../constants';
+import { CURRENCY_SIGN, ProductViewStyles } from '../../constants';
 import styles from './ProductItem.module.scss';
 import Card from '../Card/Card';
 
@@ -57,7 +57,7 @@ const ProductItem = ({ data, style }: Props) => {
                 <div className={styles.description}>
                   <span>Category: {data.category}</span>
                   <span>Brand: {data.brand}</span>
-                  <span>Price: €{data.price}</span>
+                  <span>Price: {CURRENCY_SIGN + data.price}</span>
                   <span>Discount: {data.discountPercentage}%</span>
                   <span>Rating: {data.rating}</span>
                   <span>Stock: {data.stock}</span>

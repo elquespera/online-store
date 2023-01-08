@@ -1,11 +1,12 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { CURRENCY_SIGN } from '../../constants';
 import { CartProductContent, CartProductsContext } from '../../context';
-import { CartProduct } from '../../types';
 import styles from './Header.module.scss';
 
 const Header = () => {
-  const { cartProducts }: CartProductContent = useContext(CartProductsContext);
+  const { cartTotal, cartQuantity }: CartProductContent =
+    useContext(CartProductsContext);
   return (
     <header className={styles.header}>
       <Link to="/">
@@ -14,22 +15,11 @@ const Header = () => {
           <span className={styles.text}>Online Store</span>
         </span>
       </Link>
-      <span className={styles.total}>
-        Total: €
-        {cartProducts.reduce(
-          (sum: number, elem: CartProduct) => sum + elem.price * elem.quantity,
-          0
-        )}
-      </span>
+      <span className={styles.total}>Total: {CURRENCY_SIGN + cartTotal()}</span>
       <Link to="cart">
         <div className={styles.cart}>
           <span className={styles['cart-icon']}></span>
-          <span className={styles.badge}>
-            {cartProducts.reduce(
-              (sum: number, elem: CartProduct) => sum + elem.quantity,
-              0
-            )}
-          </span>
+          <span className={styles.badge}>{cartQuantity()}</span>
         </div>
       </Link>
     </header>

@@ -8,6 +8,7 @@ import { Product } from '../../types';
 import styles from './DetailsPage.module.scss';
 import { Link } from 'react-router-dom';
 import Card from '../../components/Card/Card';
+import { CURRENCY_SIGN } from '../../constants';
 
 const DetailsPage = () => {
   const {
@@ -71,7 +72,9 @@ const DetailsPage = () => {
                 })}
             </ul>
             <div className={styles['wrapper-price']}>
-              <div className={styles.price}>€{product?.price}</div>
+              <div className={styles.price}>
+                {CURRENCY_SIGN + product?.price}
+              </div>
               {product &&
                 (productInCart(product) ? (
                   <button

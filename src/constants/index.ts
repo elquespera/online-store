@@ -58,4 +58,6 @@ export const ALL_PROMOCODES: Promocode[] = [
   { promo: 'free', title: 'FREE', discount: 50 },
 ];
 
+export const CURRENCY_SIGN = '€';
+
 export const CART_ITEMS_KEY = 'cart-items';

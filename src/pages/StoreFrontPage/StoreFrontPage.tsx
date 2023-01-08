@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import ProductItem from '../../components/ProductItem/ProductItem';
 import {
+  CURRENCY_SIGN,
   ProductCategoryFields,
   ProductFilterOptions,
   ProductSortOptionList,
@@ -210,7 +211,7 @@ const StoreFrontPage = () => {
             title="Price"
             range={priceRange}
             value={priceValue}
-            prefix="€"
+            prefix={CURRENCY_SIGN}
             onChange={priceValueChange}
           ></RangeInput>
           <RangeInput

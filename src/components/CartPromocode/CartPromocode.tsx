@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './CartPromocode.module.scss';
-import { ALL_PROMOCODES } from '../../constants';
+import { ALL_PROMOCODES, CURRENCY_SIGN } from '../../constants';
 import { Promocode } from '../../types';
 import Card from '../Card/Card';
 
@@ -45,16 +45,17 @@ const CartPromocode = ({
     <>
       {appliedPromocodes.length !== 0 && (
         <div className={styles['new-price']}>
-          Total: €
-          {(
-            price -
-            (price *
-              appliedPromocodes.reduce(
-                (sum: number, elem: Promocode) => sum + elem.discount,
-                0
-              )) /
-              100
-          ).toFixed(2)}
+          Total:
+          {CURRENCY_SIGN +
+            (
+              price -
+              (price *
+                appliedPromocodes.reduce(
+                  (sum: number, elem: Promocode) => sum + elem.discount,
+                  0
+                )) /
+                100
+            ).toFixed(2)}
         </div>
       )}
       <Card title="Applied codes">

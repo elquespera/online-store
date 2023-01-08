@@ -8,10 +8,16 @@ import OrderModal from '../../components/OrderModal/OrderModal';
 import { CartProductsContext } from '../../context';
 import { Promocode } from '../../types';
 import styles from './CartPage.module.scss';
+import { CURRENCY_SIGN } from '../../constants';
 
 const CartPage = () => {
-  const { cartProducts, setCartProducts, showOrderModal, setShowOrderModal } =
-    useContext(CartProductsContext);
+  const {
+    cartProducts,
+    setCartProducts,
+    showOrderModal,
+    setShowOrderModal,
+    cartTotal,
+  } = useContext(CartProductsContext);
   const [orderModalOpened, setOrderModalOpened] = useState(false);
   const navigate = useNavigate();
   const [page, setPage] = useState<number>(1);
@@ -31,13 +37,6 @@ const CartPage = () => {
     closeDialog();
     setCartProducts([]);
     navigate('/');
-  };
-
-  const countTotalPrice = () => {
-    return cartProducts.reduce(
-      (sum, elem) => sum + elem.price * elem.quantity,
-      0
-    );
   };
 
   if (!cartProducts.length) {
@@ -81,11 +80,11 @@ const CartPage = () => {
                 appliedPromocodes.length ? styles['old-price'] : styles.price
               }
             >
-              Total: €{countTotalPrice()}
+              Total: {CURRENCY_SIGN + cartTotal()}
             </div>
           </div>
           <CartPromocode
-            price={countTotalPrice()}
+            price={cartTotal()}
             appliedPromocodes={appliedPromocodes}
             setAppliedPromocodes={setAppliedPromocodes}
           />
@@ -93,7 +92,7 @@ const CartPage = () => {
             className={styles['btn-modal']}
             onClick={() => setOrderModalOpened(true)}
           >
-            Buy now
+            BUY NOW
           </button>
         </div>
       </Card>
