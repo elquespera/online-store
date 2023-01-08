@@ -79,16 +79,13 @@ const DetailsPage = () => {
                 (productInCart(product) ? (
                   <button
                     onClick={(e) => removeFromCart(e, product)}
-                    className={styles['btn']}
+                    className={styles['btn-remove']}
                   >
-                    {'REMOVE FROM CART'}
+                    REMOVE FROM CART
                   </button>
                 ) : (
-                  <button
-                    onClick={(e) => addToCart(e, product)}
-                    className={styles['btn']}
-                  >
-                    {'ADD TO CART'}
+                  <button onClick={(e) => addToCart(e, product)}>
+                    ADD TO CART
                   </button>
                 ))}
               <button onClick={buyHandler} className={styles['btn']}>
