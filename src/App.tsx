@@ -8,6 +8,7 @@ import { CartProduct, Product } from './types';
 
 const App = () => {
   const [cartProducts, setCartProducts] = useState<CartProduct[]>([]);
+  const [showOrderModal, setShowOrderModal] = useState(false);
 
   const addToCart = (
     event: React.MouseEvent<HTMLButtonElement>,
@@ -41,7 +42,14 @@ const App = () => {
   return (
     <div className="App">
       <CartProductsContext.Provider
-        value={{ cartProducts, setCartProducts, removeFromCart, addToCart }}
+        value={{
+          cartProducts,
+          setCartProducts,
+          removeFromCart,
+          addToCart,
+          showOrderModal,
+          setShowOrderModal,
+        }}
       >
         <BrowserRouter>
           <Header />

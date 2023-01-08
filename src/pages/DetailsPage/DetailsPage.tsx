@@ -10,8 +10,12 @@ import { Link } from 'react-router-dom';
 import Card from '../../components/Card/Card';
 
 const DetailsPage = () => {
-  const { cartProducts, addToCart, removeFromCart }: CartProductContent =
-    useContext(CartProductsContext);
+  const {
+    cartProducts,
+    addToCart,
+    removeFromCart,
+    setShowOrderModal,
+  }: CartProductContent = useContext(CartProductsContext);
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [product, setProduct] = useState<Product>();
@@ -27,6 +31,7 @@ const DetailsPage = () => {
     if (product) {
       addToCart(event, product);
     }
+    setShowOrderModal(true);
     navigate('/cart');
   };
 
