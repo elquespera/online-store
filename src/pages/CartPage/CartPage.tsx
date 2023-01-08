@@ -12,13 +12,15 @@ import styles from './CartPage.module.scss';
 const CartPage = () => {
   const [orderModalOpened, setOrderModalOpened] = useState(false);
   const navigate = useNavigate();
-  const { cartProducts }: CartProductContent = useContext(CartProductsContext);
+  const { cartProducts, setCartProducts }: CartProductContent =
+    useContext(CartProductsContext);
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(3);
   const [appliedPromocodes, setAppliedPromocodes] = useState<Promocode[]>([]);
 
   const orderModalOnSuccess = () => {
     setOrderModalOpened(false);
+    setCartProducts([]);
     navigate('/');
   };
 

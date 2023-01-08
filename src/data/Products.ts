@@ -12,10 +12,8 @@ export const PRODUCTS = [
     thumbnail: 'https://i.dummyjson.com/data/products/1/thumbnail.jpg',
     images: [
       'https://i.dummyjson.com/data/products/1/1.jpg',
-      'https://i.dummyjson.com/data/products/1/2.jpg',
       'https://i.dummyjson.com/data/products/1/3.jpg',
       'https://i.dummyjson.com/data/products/1/4.jpg',
-      'https://i.dummyjson.com/data/products/1/thumbnail.jpg',
     ],
   },
   {
@@ -49,7 +47,10 @@ export const PRODUCTS = [
     brand: 'Samsung',
     category: 'smartphones',
     thumbnail: 'https://i.dummyjson.com/data/products/3/thumbnail.jpg',
-    images: ['https://i.dummyjson.com/data/products/3/1.jpg'],
+    images: [
+      'https://i.dummyjson.com/data/products/3/1.jpg',
+      'https://www.iguides.ru/upload/iblock/8a8/8a844f356c46faed96fb703cee9e401a.jpeg',
+    ],
   },
   {
     id: 4,
@@ -180,7 +181,6 @@ export const PRODUCTS = [
     thumbnail: 'https://i.dummyjson.com/data/products/10/thumbnail.jpeg',
     images: [
       'https://i.dummyjson.com/data/products/10/1.jpg',
-      'https://i.dummyjson.com/data/products/10/2.jpg',
       'https://i.dummyjson.com/data/products/10/3.jpg',
       'https://i.dummyjson.com/data/products/10/thumbnail.jpeg',
     ],
@@ -297,7 +297,6 @@ export const PRODUCTS = [
     images: [
       'https://i.dummyjson.com/data/products/16/1.png',
       'https://i.dummyjson.com/data/products/16/2.webp',
-      'https://i.dummyjson.com/data/products/16/3.jpg',
       'https://i.dummyjson.com/data/products/16/4.jpg',
       'https://i.dummyjson.com/data/products/16/thumbnail.jpg',
     ],
@@ -376,7 +375,6 @@ export const PRODUCTS = [
       'https://i.dummyjson.com/data/products/20/1.jpg',
       'https://i.dummyjson.com/data/products/20/2.jpg',
       'https://i.dummyjson.com/data/products/20/3.jpg',
-      'https://i.dummyjson.com/data/products/20/4.jpg',
       'https://i.dummyjson.com/data/products/20/thumbnail.jpg',
     ],
   },
@@ -430,7 +428,6 @@ export const PRODUCTS = [
       'https://i.dummyjson.com/data/products/23/1.jpg',
       'https://i.dummyjson.com/data/products/23/2.jpg',
       'https://i.dummyjson.com/data/products/23/3.jpg',
-      'https://i.dummyjson.com/data/products/23/4.jpg',
       'https://i.dummyjson.com/data/products/23/thumbnail.jpg',
     ],
   },
@@ -448,7 +445,6 @@ export const PRODUCTS = [
     thumbnail: 'https://i.dummyjson.com/data/products/24/thumbnail.jpg',
     images: [
       'https://i.dummyjson.com/data/products/24/1.jpg',
-      'https://i.dummyjson.com/data/products/24/2.jpg',
       'https://i.dummyjson.com/data/products/24/3.jpg',
       'https://i.dummyjson.com/data/products/24/4.jpg',
       'https://i.dummyjson.com/data/products/24/thumbnail.jpg',
@@ -490,7 +486,6 @@ export const PRODUCTS = [
       'https://i.dummyjson.com/data/products/26/2.jpg',
       'https://i.dummyjson.com/data/products/26/3.jpg',
       'https://i.dummyjson.com/data/products/26/4.jpg',
-      'https://i.dummyjson.com/data/products/26/5.jpg',
       'https://i.dummyjson.com/data/products/26/thumbnail.jpg',
     ],
   },
@@ -550,7 +545,6 @@ export const PRODUCTS = [
       'https://i.dummyjson.com/data/products/29/1.jpg',
       'https://i.dummyjson.com/data/products/29/2.jpg',
       'https://i.dummyjson.com/data/products/29/3.webp',
-      'https://i.dummyjson.com/data/products/29/4.webp',
       'https://i.dummyjson.com/data/products/29/thumbnail.webp',
     ],
   },
@@ -1073,8 +1067,6 @@ export const PRODUCTS = [
     thumbnail: 'https://i.dummyjson.com/data/products/56/thumbnail.jpg',
     images: [
       'https://i.dummyjson.com/data/products/56/1.jpg',
-      'https://i.dummyjson.com/data/products/56/2.jpg',
-      'https://i.dummyjson.com/data/products/56/3.jpg',
       'https://i.dummyjson.com/data/products/56/4.jpg',
       'https://i.dummyjson.com/data/products/56/5.jpg',
       'https://i.dummyjson.com/data/products/56/thumbnail.jpg',
@@ -1340,7 +1332,6 @@ export const PRODUCTS = [
     category: 'womens-watches',
     thumbnail: 'https://i.dummyjson.com/data/products/70/thumbnail.jpg',
     images: [
-      'https://i.dummyjson.com/data/products/70/1.jpg',
       'https://i.dummyjson.com/data/products/70/2.jpg',
       'https://i.dummyjson.com/data/products/70/thumbnail.jpg',
     ],
@@ -1475,7 +1466,6 @@ export const PRODUCTS = [
     images: [
       'https://i.dummyjson.com/data/products/77/1.jpg',
       'https://i.dummyjson.com/data/products/77/2.jpg',
-      'https://i.dummyjson.com/data/products/77/3.jpg',
       'https://i.dummyjson.com/data/products/77/thumbnail.jpg',
     ],
   },
@@ -1491,7 +1481,10 @@ export const PRODUCTS = [
     brand: 'Fashion Jewellery',
     category: 'womens-jewellery',
     thumbnail: 'https://i.dummyjson.com/data/products/78/thumbnail.jpg',
-    images: ['https://i.dummyjson.com/data/products/78/thumbnail.jpg'],
+    images: [
+      'https://i.dummyjson.com/data/products/78/thumbnail.jpg',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNACAqUE0KHK698t6S2wenwlDCsqXNy_hGqw&usqp=CAU',
+    ],
   },
   {
     id: 79,
@@ -1505,7 +1498,10 @@ export const PRODUCTS = [
     brand: 'Fashion Jewellery',
     category: 'womens-jewellery',
     thumbnail: 'https://i.dummyjson.com/data/products/79/thumbnail.jpg',
-    images: ['https://i.dummyjson.com/data/products/79/1.jpg'],
+    images: [
+      'https://i.dummyjson.com/data/products/79/1.jpg',
+      'https://img.joomcdn.net/6b04ef7e60df5755cf5490a9d93eeee1c67fc1a0_original.jpeg',
+    ],
   },
   {
     id: 80,
@@ -1698,7 +1694,6 @@ export const PRODUCTS = [
     images: [
       'https://i.dummyjson.com/data/products/89/1.jpg',
       'https://i.dummyjson.com/data/products/89/2.jpg',
-      'https://i.dummyjson.com/data/products/89/3.jpg',
       'https://i.dummyjson.com/data/products/89/4.jpg',
       'https://i.dummyjson.com/data/products/89/thumbnail.jpg',
     ],
