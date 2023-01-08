@@ -57,3 +57,13 @@ export interface SelectOption {
 export type ProductRangeField =
   | ProductCategoryFields.price
   | ProductCategoryFields.stock;
+
+export enum inputIDs {
+  name = 0,
+  phone,
+  address,
+  email,
+  cardNumber,
+  cardValid,
+  cardCVV,
+}
