@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router';
+import { CART_ITEMS_KEY } from '../../constants';
 import { CartProductContent, CartProductsContext } from '../../context';
 import { CartProduct } from '../../types';
 import styles from './CartProductItem.module.scss';
@@ -25,7 +26,7 @@ const CartProductItem: React.FC<Props> = ({ product, index }: Props) => {
       return prod;
     });
     setCartProducts(newProductsInCart);
-    localStorage.setItem('cart-items', JSON.stringify(newProductsInCart));
+    localStorage.setItem(CART_ITEMS_KEY, JSON.stringify(newProductsInCart));
   };
 
   const removeQuantityHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -40,7 +41,7 @@ const CartProductItem: React.FC<Props> = ({ product, index }: Props) => {
       return prod;
     });
     setCartProducts(newProductsInCart);
-    localStorage.setItem('cart-items', JSON.stringify(newProductsInCart));
+    localStorage.setItem(CART_ITEMS_KEY, JSON.stringify(newProductsInCart));
   };
 
   const navigateToDetailsPage = () => {

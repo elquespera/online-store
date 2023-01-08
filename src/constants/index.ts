@@ -56,3 +56,5 @@ export const ALL_PROMOCODES: Promocode[] = [
   { promo: 'rs', title: 'Rolling Scopes School', discount: 10 },
   { promo: 'epm', title: 'EPAM Systems', discount: 10 },
 ];
+
+export const CART_ITEMS_KEY = 'cart-items';
