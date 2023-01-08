@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { CART_ITEMS_KEY } from '../../constants';
 import { CartProductContent, CartProductsContext } from '../../context';
@@ -14,7 +13,6 @@ interface Props {
 const CartProductItem: React.FC<Props> = ({ product, index }: Props) => {
   const { cartProducts, setCartProducts, removeFromCart }: CartProductContent =
     useContext(CartProductsContext);
-  const navigate = useNavigate();
 
   const addQuantityHandler = () => {
     if (product.quantity + 1 > product.stock) {
