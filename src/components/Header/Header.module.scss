@@ -1,0 +1,66 @@
+@use '../../styles/variables' as vars;
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  height: var(--header-height);
+  padding: 1em;
+  color: var(--header-color);
+  background-color: var(--header-bg-color);
+  box-shadow: var(--shadow-2);
+
+  .logo {
+    color: var(--logo-color);
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+    font-size: 1.5em;
+    font-weight: bold;
+
+    .icon {
+      width: 1.2em;
+      height: 1.2em;
+      background: url('../../assets/icons/shop.svg') center left / 1.2em no-repeat;
+      filter: invert(1);
+    }
+  }
+
+  @media screen and (max-width: vars.$mobile-breakpoint) {
+    .logo .text {
+      display: none;
+    }
+  }
+
+  .total {
+    margin-left: auto;
+  }
+
+  .cart {
+    position: relative;
+
+    .cart-icon {
+      display: block;
+      width: 2em;
+      height: 2em;
+      filter: invert(1);
+      background: url('../../assets/icons/cart-shopping.svg') center left / 2em no-repeat;  
+    }
+
+    .badge {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      background-color: var(--warn-color);
+      font-weight: bold;
+      font-size: 0.8em;
+      right: -0.4em;
+      top: -0.4em;
+      border-radius: 50%;
+      width: 1.4em;
+      height: 1.4em;
+    }
+  }
+}

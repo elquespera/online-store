@@ -1,0 +1,34 @@
+.input-promocode {
+  width: 150px;
+  font-size: 16px;
+  text-align: center;
+  padding: 5px 0;
+  margin: 10px 0 5px 0;
+  border-radius: 5px;
+  border: 2px solid var(--card-title-bg-color);
+}
+
+.add-promo {
+  padding: 5px;
+  margin-left: 10px;
+}
+
+.promocode {
+  padding: 1em;
+}
+
+.applied-promo {
+  border: 2px solid var(--card-title-bg-color);
+  border-radius: 5px;
+  padding: 0.3em 0.8em;
+  
+  .remove-promo {
+    padding: 2px 5px;
+    margin-left: 2px;
+  }
+}
+
+.test-promo {
+  margin: 5px;
+  color: var(--accent-color);
+}

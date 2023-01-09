@@ -1,0 +1,13 @@
+.property {
+  padding: 0.5em 1em;
+  border-bottom: 1px solid var(--divider-color);
+}
+
+.name {
+  text-transform: capitalize;
+  font-weight: 400;
+}
+
+.value {
+  color: var(--secondary-text);
+}

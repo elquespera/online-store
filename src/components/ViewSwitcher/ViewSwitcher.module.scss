@@ -1,0 +1,29 @@
+.view-switcher {
+  display: flex;
+  gap: 0.5em;
+  button {
+    width: 2em;
+    height: 2em;
+    padding: 0;
+    background-color: transparent;
+    background-position: center;
+    background-size: cover;
+
+    &.checked {
+      outline: 0.2em solid var(--button-bg-color);
+    }
+
+    &.grid {
+      background-image: url('../../assets/icons/view-grid.svg');
+    }
+    
+    &.compact {
+      background-image: url('../../assets/icons/view-compact.svg');
+    }
+
+    &.list {
+      background-image: url('../../assets/icons/view-list.svg');
+    }
+
+  }
+}

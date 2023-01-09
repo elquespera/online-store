@@ -1,0 +1,58 @@
+@use '../../styles/variables' as vars;
+
+.cart-page {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2em;
+  align-items: flex-start;
+  margin: 0 auto;
+  max-width: vars.$max-width;
+
+  @media screen and (max-width: vars.$max-width) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cart-products {
+  border-radius: 0.5em;
+  overflow: hidden;
+  box-shadow: var(--shadow-3);
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  padding: 0.3em 0.8em;
+  gap: 0.2em 1em;
+  background-color: var(--card-title-bg-color);
+  color: var(--card-title-color);
+  font-size: 1.2rem;
+
+  @media screen and (max-width: vars.$tablet-breakpoint) {
+    grid-template-columns: auto;
+  }
+}
+
+.cart-buy {
+  padding: 1em;
+  font-size: 1.1em;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  .old-price {
+    text-decoration: line-through;
+  }
+}
+
+.btn-modal {
+  align-self: center;
+}
+
+.empty-cart {
+  font-size: 28px;
+  text-align: center;
+  margin-top: 50px;
+}

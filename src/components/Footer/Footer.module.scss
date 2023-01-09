@@ -1,0 +1,35 @@
+@use '../../styles/variables' as vars;
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  height: var(--footer-height);
+  padding: 1em;
+  color: var(--footer-color);
+  background-color: var(--footer-bg-color);
+  box-shadow: var(--shadow-3);
+
+  a {
+    opacity: 0.7;
+    color: var(--footer-color);
+    display: flex;
+    align-items: center;
+    gap: 0.2em;
+    img {
+      filter: invert(1);
+      height: 1em;
+    }
+
+    @media screen and (max-width: vars.$tablet-breakpoint) {
+      span {
+        display: none;
+      }
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
