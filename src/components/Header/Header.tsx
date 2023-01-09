@@ -9,17 +9,19 @@ const Header = () => {
     useContext(CartProductsContext);
   return (
     <header className={styles.header}>
-      <Link to="/">
+      <Link to="/" data-testid="store-front-link">
         <span className={styles.logo}>
           <span className={styles.icon}></span>
           <span className={styles.text}>Online Store</span>
         </span>
       </Link>
       <span className={styles.total}>Total: {CURRENCY_SIGN + cartTotal()}</span>
-      <Link to="cart">
+      <Link to="cart" data-testid="cart-link">
         <div className={styles.cart}>
           <span className={styles['cart-icon']}></span>
-          <span className={styles.badge}>{cartQuantity()}</span>
+          <span className={styles.badge} data-testid="quantity products">
+            {cartQuantity()}
+          </span>
         </div>
       </Link>
     </header>

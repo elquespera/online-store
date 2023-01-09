@@ -173,7 +173,7 @@ const StoreFrontPage = () => {
   };
 
   return (
-    <div className={styles['store-front-page']}>
+    <div className={styles['store-front-page']} data-testid="store-front-page">
       <Card title="Filters" big>
         <div className={styles['filters-panel']}>
           <div className={styles['buttons-panel']}>
