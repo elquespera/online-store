@@ -51,6 +51,7 @@ export const ORDER_INPUTS = [
     hint: 'Must contain 16 numbers',
     pattern: /^[0-9]{4}(\s[0-9]{4}){3}$/,
     valid: true,
+    number: true,
   },
   {
     id: inputIDs.cardValid,
@@ -59,6 +60,7 @@ export const ORDER_INPUTS = [
     hint: 'MM/YY',
     pattern: /^[0-9]{2}\/[0-9]{2}$/,
     valid: true,
+    number: true,
   },
   {
     id: inputIDs.cardCVV,
@@ -67,5 +69,6 @@ export const ORDER_INPUTS = [
     hint: '3 numbers on the back of the card.',
     pattern: /^[0-9]{3}$/,
     valid: true,
+    number: true,
   },
 ];
