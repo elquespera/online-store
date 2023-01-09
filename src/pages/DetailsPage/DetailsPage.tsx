@@ -37,59 +37,65 @@ const DetailsPage = () => {
 
   return (
     <div className={styles['details-page']}>
-      <Card big title="Details">
-        <div className={styles['bread-crumbs']}>
-          <Link className={styles['store']} to="/">
-            STORE
-          </Link>
-          <div className={styles.next}></div>
-          <div>{product?.category.toUpperCase()}</div>
-          <div className={styles.next}></div>
-          <div>{product?.brand.toUpperCase()}</div>
-          <div className={styles.next}></div>
-          <div>{product?.title.toUpperCase()}</div>
-        </div>
-        <div className={styles['wrapper-info']}>
-          {product?.images && (
-            <ProductImage images={product?.images} title={product?.title} />
-          )}
-          <div className={styles.properties}>
-            <h2>{product?.title}</h2>
-            <ul>
-              {product &&
-                Object.entries(product).map((prop) => {
-                  if (!ProductHiddenFields.includes(prop[0]))
-                    return (
-                      <ProductProperty
-                        key={prop[0]}
-                        name={prop[0]}
-                        value={prop[1]}
-                      />
-                    );
-                })}
-            </ul>
-            <div className={styles['wrapper-price']}>
-              <div className={styles.price}>
-                {CURRENCY_SIGN + product?.price}
+      {product ? (
+        <Card big title="Details">
+          <div className={styles['bread-crumbs']}>
+            <Link className={styles['store']} to="/">
+              STORE
+            </Link>
+            <div className={styles.next}></div>
+            <div>{product?.category.toUpperCase()}</div>
+            <div className={styles.next}></div>
+            <div>{product?.brand.toUpperCase()}</div>
+            <div className={styles.next}></div>
+            <div>{product?.title.toUpperCase()}</div>
+          </div>
+          <div className={styles['wrapper-info']}>
+            {product?.images && (
+              <ProductImage images={product?.images} title={product?.title} />
+            )}
+            <div className={styles.properties}>
+              <h2>{product?.title}</h2>
+              <ul>
+                {product &&
+                  Object.entries(product).map((prop) => {
+                    if (!ProductHiddenFields.includes(prop[0]))
+                      return (
+                        <ProductProperty
+                          key={prop[0]}
+                          name={prop[0]}
+                          value={prop[1]}
+                        />
+                      );
+                  })}
+              </ul>
+              <div className={styles['wrapper-price']}>
+                <div className={styles.price}>
+                  {CURRENCY_SIGN + product?.price}
+                </div>
+                {product &&
+                  (productInCart(product) ? (
+                    <button
+                      onClick={(e) => removeFromCart(e, product)}
+                      className={styles['btn-remove']}
+                    >
+                      REMOVE FROM CART
+                    </button>
+                  ) : (
+                    <button onClick={(e) => addToCart(e, product)}>
+                      ADD TO CART
+                    </button>
+                  ))}
+                <button onClick={buyHandler}>BUY NOW</button>
               </div>
-              {product &&
-                (productInCart(product) ? (
-                  <button
-                    onClick={(e) => removeFromCart(e, product)}
-                    className={styles['btn-remove']}
-                  >
-                    REMOVE FROM CART
-                  </button>
-                ) : (
-                  <button onClick={(e) => addToCart(e, product)}>
-                    ADD TO CART
-                  </button>
-                ))}
-              <button onClick={buyHandler}>BUY NOW</button>
             </div>
           </div>
+        </Card>
+      ) : (
+        <div>
+          Product with id of <b>{id}</b> was not found.
         </div>
-      </Card>
+      )}
     </div>
   );
 };
