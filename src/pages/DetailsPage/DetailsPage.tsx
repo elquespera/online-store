@@ -93,7 +93,7 @@ const DetailsPage = () => {
         </Card>
       ) : (
         <div>
-          Product with id of <b>{id}</b> was not found.
+          The product with an id of <b>{id}</b> was not found.
         </div>
       )}
     </div>
