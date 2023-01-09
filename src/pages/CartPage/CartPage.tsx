@@ -40,11 +40,15 @@ const CartPage = () => {
   };
 
   if (!cartProducts.length) {
-    return <div className={styles['empty-cart']}>Cart is Empty</div>;
+    return (
+      <div className={styles['empty-cart']} data-testid="cart-page">
+        Cart is Empty
+      </div>
+    );
   }
 
   return (
-    <div className={styles['cart-page']}>
+    <div className={styles['cart-page']} data-testid="cart-page">
       <div className={styles['cart-products']}>
         <div className={styles.header}>
           <h3>Products In Cart</h3>

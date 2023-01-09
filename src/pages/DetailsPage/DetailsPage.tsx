@@ -36,7 +36,7 @@ const DetailsPage = () => {
   };
 
   return (
-    <div className={styles['details-page']}>
+    <div className={styles['details-page']} data-testid="details-page">
       {product ? (
         <Card big title="Details">
           <div className={styles['bread-crumbs']}>
@@ -82,7 +82,10 @@ const DetailsPage = () => {
                       REMOVE FROM CART
                     </button>
                   ) : (
-                    <button onClick={(e) => addToCart(e, product)}>
+                    <button
+                      onClick={(e) => addToCart(e, product)}
+                      data-testid="btn add to cart"
+                    >
                       ADD TO CART
                     </button>
                   ))}
@@ -92,7 +95,7 @@ const DetailsPage = () => {
           </div>
         </Card>
       ) : (
-        <div>
+        <div data-testid="product not found">
           The product with an id of <b>{id}</b> was not found.
         </div>
       )}
