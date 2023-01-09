@@ -48,7 +48,15 @@ export const ProductSortValues = [
   'discount-descending',
 ];
 
-export const ProductViewStyles = ['grid', 'compact', 'list'];
+export const VIEW_STYLES = ['grid', 'compact', 'list'];
+
+export const ProductHiddenFields = [
+  'id',
+  'title',
+  'thumbnail',
+  'images',
+  'price',
+];
 
 export const PARAMS_SEPARATOR = '↕';
 
@@ -58,4 +66,9 @@ export const ALL_PROMOCODES: Promocode[] = [
   { promo: 'free', title: 'FREE', discount: 50 },
 ];
 
+export const CURRENCY_SIGN = '€';
+
 export const CART_ITEMS_KEY = 'cart-items';
+export const CART_PAGE_KEY = 'cart-page';
+export const CART_LIMIT_KEY = 'cart-limit';
+export const PROMOCODE_KEY = 'cart-promocodes';

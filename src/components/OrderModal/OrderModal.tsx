@@ -63,7 +63,7 @@ const OrderModal = ({ isOpened, onCancel, onSuccess }: OrderModalProps) => {
       <React.Fragment>
         {inputs
           .slice(from, to)
-          .map(({ id, value, placeholder, hint, pattern, valid }) => (
+          .map(({ id, value, placeholder, hint, pattern, valid, number }) => (
             <OrderInput
               key={id}
               id={id}
@@ -72,6 +72,7 @@ const OrderModal = ({ isOpened, onCancel, onSuccess }: OrderModalProps) => {
               hint={hint}
               pattern={pattern}
               valid={valid}
+              number={number}
               onChange={validateInput}
             />
           ))}

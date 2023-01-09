@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import ProductItem from '../../components/ProductItem/ProductItem';
 import {
+  CURRENCY_SIGN,
   ProductCategoryFields,
   ProductFilterOptions,
   ProductSortOptionList,
   ProductSortValues,
-  ProductViewStyles,
+  VIEW_STYLES,
 } from '../../constants';
 import { MinMax, Product, SelectOption } from '../../types';
 import { ProductService } from '../../services/ProductService';
@@ -42,7 +43,7 @@ const StoreFrontPage = () => {
   const [stockValue, setStockValue] = useState<MinMax>();
   const [searchStr, setSearchStr] = useState('');
   const [sortIndex, setSortIndex] = useState(0);
-  const [viewStyle, setViewStyle] = useState(ProductViewStyles[0]);
+  const [viewStyle, setViewStyle] = useState(VIEW_STYLES[0]);
   const [copyHintVisible, setCopyHintVisible] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   let productFilters = ProductService.generateProductFilters(searchParams);
@@ -107,7 +108,7 @@ const StoreFrontPage = () => {
     );
     setSearchStr(productFilters.search || '');
     setSortIndex(ProductSortValues.indexOf(productFilters.sort || ''));
-    setViewStyle(productFilters.view || ProductViewStyles[0]);
+    setViewStyle(productFilters.view || VIEW_STYLES[0]);
   };
 
   const clearFilters = () => setSearchParams();
@@ -210,7 +211,7 @@ const StoreFrontPage = () => {
             title="Price"
             range={priceRange}
             value={priceValue}
-            prefix="€"
+            prefix={CURRENCY_SIGN}
             onChange={priceValueChange}
           ></RangeInput>
           <RangeInput

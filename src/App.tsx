@@ -38,6 +38,15 @@ const App = () => {
     return cartProducts.find(({ id }) => product.id === id) !== undefined;
   };
 
+  const cartTotal = () =>
+    cartProducts.reduce(
+      (sum, { price, quantity }) => sum + price * quantity,
+      0
+    );
+
+  const cartQuantity = () =>
+    cartProducts.reduce((sum, { quantity }) => sum + quantity, 0);
+
   useEffect(() => {
     const item = localStorage.getItem(CART_ITEMS_KEY);
     if (item) {
@@ -56,6 +65,8 @@ const App = () => {
           productInCart,
           showOrderModal,
           setShowOrderModal,
+          cartTotal,
+          cartQuantity,
         }}
       >
         <BrowserRouter>

@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CartProductContent, CartProductsContext } from '../../context';
 import { Product } from '../../types';
-import { ProductViewStyles } from '../../constants';
+import { CURRENCY_SIGN, VIEW_STYLES } from '../../constants';
 import styles from './ProductItem.module.scss';
 import Card from '../Card/Card';
 
@@ -39,7 +39,7 @@ const ProductItem = ({ data, style }: Props) => {
           styles[style]
         }
       >
-        {style === ProductViewStyles[2] ? (
+        {style === VIEW_STYLES[2] ? (
           <div className={styles.list}>
             <img src={data.thumbnail} alt={data.title} />
             <div className={styles.title}>{data.title}</div>
@@ -49,15 +49,15 @@ const ProductItem = ({ data, style }: Props) => {
           <Card title={data.title} warn={productInCart(data)} hover>
             <div
               className={
-                style === ProductViewStyles[1] ? styles.compact : styles.grid
+                style === VIEW_STYLES[1] ? styles.compact : styles.grid
               }
             >
               <img src={data.thumbnail} alt={data.title} />
-              {style !== ProductViewStyles[1] && (
+              {style !== VIEW_STYLES[1] && (
                 <div className={styles.description}>
                   <span>Category: {data.category}</span>
                   <span>Brand: {data.brand}</span>
-                  <span>Price: €{data.price}</span>
+                  <span>Price: {CURRENCY_SIGN + data.price}</span>
                   <span>Discount: {data.discountPercentage}%</span>
                   <span>Rating: {data.rating}</span>
                   <span>Stock: {data.stock}</span>

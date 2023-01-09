@@ -8,6 +8,7 @@ interface OrderInputProps {
   hint?: string;
   pattern: RegExp;
   valid: boolean;
+  number?: boolean;
   onChange: (id: number, value: string, pattern: RegExp) => void;
 }
 
@@ -18,6 +19,7 @@ const OrderInput = ({
   hint,
   valid,
   pattern,
+  number,
   onChange,
 }: OrderInputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -29,13 +31,13 @@ const OrderInput = ({
     }
   };
 
-  let containterClass = styles['order-input'];
-  if (!valid) containterClass += ' ' + styles.invalid;
-
   return (
-    <div className={containterClass}>
+    <div
+      className={styles['order-input'] + (valid ? '' : ' ' + styles.invalid)}
+    >
       <input
         ref={inputRef}
+        inputMode={number ? 'numeric' : 'text'}
         placeholder={placeholder}
         onInput={validateInput}
         onBlur={validateInput}

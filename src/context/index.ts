@@ -15,6 +15,8 @@ export type CartProductContent = {
     data: Product
   ) => void;
   productInCart: (product?: Product) => boolean;
+  cartTotal: () => number;
+  cartQuantity: () => number;
 };
 
 export const CartProductsContext = createContext<CartProductContent>({
@@ -25,4 +27,6 @@ export const CartProductsContext = createContext<CartProductContent>({
   addToCart: () => ({}),
   removeFromCart: () => ({}),
   productInCart: () => false,
+  cartTotal: () => 0,
+  cartQuantity: () => 0,
 });
