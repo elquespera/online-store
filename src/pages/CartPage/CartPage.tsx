@@ -17,6 +17,7 @@ const CartPage = () => {
     showOrderModal,
     setShowOrderModal,
     cartTotal,
+    cartQuantity,
   } = useContext(CartProductsContext);
   const [orderModalOpened, setOrderModalOpened] = useState(false);
   const navigate = useNavigate();
@@ -77,7 +78,7 @@ const CartPage = () => {
         <div className={styles['cart-buy']}>
           <div>
             <div className={styles['quantity-products']}>
-              Products: {cartProducts.length}
+              Products: {cartQuantity()}
             </div>
             <div
               className={
